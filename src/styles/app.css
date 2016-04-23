@@ -1,0 +1,7 @@
+#root {
+	min-height: 565px;
+}
+
+.navigation-categories:hover .mega-menu-content {
+	display: block !important;
+}

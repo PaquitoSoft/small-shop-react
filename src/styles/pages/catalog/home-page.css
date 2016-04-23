@@ -1,0 +1,10 @@
+.home-page {
+	&.content-wrap {
+		padding-top: 40px;
+		padding-bottom: 0px;
+		min-height: 565px;
+	}
+	.shop-info {
+		margin-top: 20px;
+	}
+}
