@@ -8,4 +8,9 @@
 7. router
 7.1. component + configuration
 7.2. load page data strategy
-8. JS and CSS bundles per page
+
+
+
+# TODO
+* JS and CSS bundles per page
+* Server side rendering

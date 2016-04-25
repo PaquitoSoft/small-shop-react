@@ -37,6 +37,17 @@ function parseJson(res) {
 	});
 }
 
+function parseText(res) {
+	return new Promise(resolve => {
+		res.text().then(text => {
+			resolve({
+				result: text,
+				url: res.url
+			});
+		});
+	});
+}
+
 function cacheResponse(ttl, key) {
 	return (data) => {
 		if (ttl) {
@@ -61,6 +72,10 @@ function getData(url, responseParser, options = {ttl: 0}) {
 
 export function getJson(url, options) {
 	return getData(url, parseJson, options);
+}
+
+export function getText(url, options) {
+	return getData(url, parseText, options);
 }
 
 export function getXml(url, options) {
