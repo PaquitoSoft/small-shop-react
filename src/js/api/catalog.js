@@ -18,3 +18,21 @@ export function getFeaturedProducts() {
 		ttl: 5 // minutes
 	});
 }
+
+export function getCategoryDetails(categoryId) {
+	return ajax.getJson(`${appConfig.apiHost}/catalog/category/${categoryId}`, {
+		ttl: 60 // minutes
+	});
+}
+
+export function getCategoryProdycts(categoryId) {
+	return ajax.getJson(`${appConfig.apiHost}/catalog/category/${categoryId}/products`, {
+		ttl: 60 // minutes
+	});
+}
+
+export function getProductDetails(productId) {
+	return ajax.getJson(`${appConfig.apiHost}/catalog/product/${productId}`, {
+		ttl: 60 // minutes
+	});
+}

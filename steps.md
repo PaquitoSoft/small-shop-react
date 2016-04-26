@@ -12,5 +12,5 @@
 
 
 # TODO
-* JS and CSS bundles per page
+* JS and CSS bundles per page (load assets on router navigation)
 * Server side rendering

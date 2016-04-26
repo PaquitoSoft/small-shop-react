@@ -12,37 +12,6 @@ import '../../../styles/pages/catalog/home-page.css';
 
 const logger = new Logger('HomePage');
 
-const products = [
-	{
-		name: 'Checked Short Dress',
-		label: '50% Off',
-		images: ['/images/shop/dress/1.jpg', '/images/shop/dress/1-1.jpg'],
-		price: '12.49',
-		oldPrice: '24.99'
-	},
-	{
-		name: 'Slim Fit Chinos',
-		label: undefined,
-		images: ['/images/shop/pants/1-1.jpg', '/images/shop/pants/1.jpg'],
-		price: '39.99',
-		oldPrice: undefined
-	},
-	{
-		name: 'Dark Brown Boots',
-		label: undefined,
-		images: ['/images/shop/shoes/1.jpg', '/images/shop/shoes/1-1.jpg'],
-		price: '49.00',
-		oldPrice: undefined
-	},
-	{
-		name: 'Light Blue Denim Dress',
-		label: undefined,
-		images: ['/images/shop/dress/2.jpg', '/images/shop/dress/2-2.jpg'],
-		price: '19.95',
-		oldPrice: undefined
-	}
-];
-
 class HomePage extends React.Component {
 
 	static loadPageData() {
@@ -89,7 +58,7 @@ class HomePage extends React.Component {
 
 						<div className="tab-container">
 							<div className="tab-content clearfix" id="tabs-9">
-								<div id="shop" className="shop clearfix">
+								<div id="shop" className="shop clearfix product-4">
 									{productsElements}
 								</div>
 							</div>

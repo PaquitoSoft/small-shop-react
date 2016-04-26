@@ -23,7 +23,7 @@ class ProductSummary extends React.Component {
 		}
 
 		return (
-			<div className="product product-4 clearfix">
+			<div className="product clearfix">
 				<div className="product-image">
 					<a href="#"><img src={this.getProductImageUrl(0)} alt={product.name}/></a>
 					<a href="#"><img src={this.getProductImageUrl(1)} alt={product.name}/></a>

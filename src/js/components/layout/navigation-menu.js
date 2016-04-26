@@ -19,17 +19,23 @@ class NavigationMenu extends React.Component {
 	componentWillMount() {
 		catalogApi.getCategories()
 			.then(categories => {
-				this.setState({categories});
+				this.setState({ categories });
 			})
 			.catch(err => {
 				logger.error('componentWillMount# Error loading categories:', err.toString());
 			});
 	}
 
-	render() {
-		const categories = this.state.categories.map((category, index) => {
+	createCategoryElements(categories) {
+		return categories.map((category, index) => {
 			return (<li key={index}><a href={`/category/${category.name}/${category.id}`}><div>{category.name}</div></a></li>);
 		});
+	}
+
+	render() {
+		let middleIndex =  Math.ceil(this.state.categories.length / 2),
+			categories = this.state.categories,
+			 group1, group2;
 
 		return (
 			<nav id="primary-menu">
@@ -38,22 +44,16 @@ class NavigationMenu extends React.Component {
 						<a href="#"><div>Categories</div><span>Out of the Box</span></a>
 						<div className="mega-menu-content style-2 clearfix">
 							<ul className="mega-menu-column col-md-6">
-								<li className="mega-menu-title"><a href="#"><div>Footwear</div></a>
+								<li className="mega-menu-title">
 									<ul>
-										{categories}
+										{this.createCategoryElements(categories.slice(0, middleIndex))}
 									</ul>
 								</li>
 							</ul>
 							<ul className="mega-menu-column col-md-6">
-								<li className="mega-menu-title"><a href="#"><div>Clothing</div></a>
+								<li className="mega-menu-title">
 									<ul>
-										<li><a href="#"><div>Casual Shirts</div></a></li>
-										<li><a href="#"><div>T-Shirts</div></a></li>
-										<li><a href="#"><div>Collared Tees</div></a></li>
-										<li><a href="#"><div>Pants / Trousers</div></a></li>
-										<li><a href="#"><div>Ethnic Wear</div></a></li>
-										<li><a href="#"><div>Jeans</div></a></li>
-										<li><a href="#"><div>Sweamwear</div></a></li>
+										{this.createCategoryElements(categories.slice(middleIndex))}
 									</ul>
 								</li>
 							</ul>
