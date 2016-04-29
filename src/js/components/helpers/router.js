@@ -20,22 +20,27 @@ class Router extends React.Component {
 		});
 	}
 
-	handleRouteChange(routeComponent, routeContext) {
-		logger.debug('handleRouteChange# Navigating to:', routeComponent.name, routeContext);
-		// TODO Add a loader so the user knows we're doing something
-		routeComponent.loadPageData(routeContext)
-			.then(pageData => {
-				this.setState({
-					currentComponent: routeComponent,
-					routeContext,
-					pageData
+	handleRouteChange(pageModulePath, routeContext) {
+		logger.debug('handleRouteChange# Navigating to:', pageModulePath, routeContext);
+
+		require(`bundle!../${pageModulePath}`)(pageModule => {
+			const PageComponent = pageModule.default;
+
+			// TODO Add a loader so the user knows we're doing something
+			PageComponent.loadPageData(routeContext)
+				.then(pageData => {
+					this.setState({
+						currentComponent: PageComponent,
+						routeContext,
+						pageData
+					});
+				})
+				.catch(err => {
+					// TODO Generic navigation error handling
+					logger.error('handleRouteChange# Navigation error:', err.toString());
+					logger.error(err.stack);
 				});
-			})
-			.catch(err => {
-				// TODO Generic navigation error handling
-				logger.error('handleRouteChange# Navigation error:', err.toString());
-				logger.error(err.stack);
-			});
+		});
 	}
 
 	componentDidMount() {

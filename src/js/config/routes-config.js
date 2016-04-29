@@ -1,5 +1,5 @@
-import HomePage from '../components/catalog/home-page';
-
 export default Object.freeze({
-	'/': HomePage
+	// Route:page-component-path (Base path: /src/js/components/)
+	'/': 'catalog/home-page',
+	'/category/:categoryName/:categoryId': 'catalog/category-page'
 });
