@@ -25,7 +25,7 @@ export function getCategoryDetails(categoryId) {
 	});
 }
 
-export function getCategoryProdycts(categoryId) {
+export function getCategoryProducts(categoryId) {
 	return ajax.getJson(`${appConfig.apiHost}/catalog/category/${categoryId}/products`, {
 		ttl: 60 // minutes
 	});

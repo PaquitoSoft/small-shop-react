@@ -11,7 +11,7 @@ export default function MiniCart(props) {
 				<div className="top-cart-items">
 					<div className="top-cart-item clearfix">
 						<div className="top-cart-item-image">
-							<a href="#"><img src="images/shop/small/1.jpg" alt="Blue Round-Neck Tshirt" /></a>
+							<a href="#"><img src="/images/shop/small/1.jpg" alt="Blue Round-Neck Tshirt" /></a>
 						</div>
 						<div className="top-cart-item-desc">
 							<a href="#">Blue Round-Neck Tshirt</a>
@@ -21,7 +21,7 @@ export default function MiniCart(props) {
 					</div>
 					<div className="top-cart-item clearfix">
 						<div className="top-cart-item-image">
-							<a href="#"><img src="images/shop/small/6.jpg" alt="Light Blue Denim Dress" /></a>
+							<a href="#"><img src="/images/shop/small/6.jpg" alt="Light Blue Denim Dress" /></a>
 						</div>
 						<div className="top-cart-item-desc">
 							<a href="#">Light Blue Denim Dress</a>

@@ -13,10 +13,10 @@ export default function Header(props) {
 
 					<div id="logo">
 						<a href="/" className="standard-logo">
-							<img src="images/logo.png" alt="Canvas Logo"/>
+							<img src="/images/logo.png" alt="Canvas Logo"/>
 						</a>
 						<a href="/" className="retina-logo">
-							<img src="images/logo@2x.png" alt="Canvas Logo"/>
+							<img src="/images/logo@2x.png" alt="Canvas Logo"/>
 						</a>
 					</div>
 

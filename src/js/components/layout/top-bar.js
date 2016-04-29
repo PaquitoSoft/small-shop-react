@@ -14,9 +14,9 @@ export default function TopBar(props) {
 							<li>
 								<a href="#">EN <i className="icon-angle-down"></i></a>
 								<ul>
-									<li><a href="#"><img src="images/icons/flags/french.png" alt="French"/> FR</a></li>
-									<li><a href="#"><img src="images/icons/flags/italian.png" alt="Italian"/> IT</a></li>
-									<li><a href="#"><img src="images/icons/flags/german.png" alt="German"/> DE</a></li>
+									<li><a href="#"><img src="/images/icons/flags/french.png" alt="French"/> FR</a></li>
+									<li><a href="#"><img src="/images/icons/flags/italian.png" alt="Italian"/> IT</a></li>
+									<li><a href="#"><img src="/images/icons/flags/german.png" alt="German"/> DE</a></li>
 								</ul>
 							</li>
 							<li><a href="#">Login</a>
