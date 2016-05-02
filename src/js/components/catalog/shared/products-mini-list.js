@@ -1,12 +1,13 @@
 import React from 'react';
+import {getProductImageUrl} from '../../../plugins/url-builder';
 
-export default function ProductsMiniList(props) {
+export default function ProductsMiniList({title, products: productsList}) {
 
-	const products = props.products.map((product, index) => {
+	const products = productsList.map((product, index) => {
 		return (
-			<div className="spost clearfix">
+			<div className="spost clearfix" key={index}>
 				<div className="entry-image">
-					<a href="#"><img src={product.imagesUrls[0]} alt="Image" /></a>
+					<a href="#"><img src={getProductImageUrl(product.id, product.imagesUrls[0])} alt="Image" /></a>
 				</div>
 				<div className="entry-c">
 					<div className="entry-title">
@@ -23,7 +24,7 @@ export default function ProductsMiniList(props) {
 
 	return (
 		<div className="widget clearfix">
-			<h4>{props.title}</h4>
+			<h4>{title}</h4>
 			<div id="post-list-footer">
 				{products}
 			</div>

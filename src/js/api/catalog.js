@@ -19,6 +19,12 @@ export function getFeaturedProducts() {
 	});
 }
 
+export function getPopularProducts() {
+	return ajax.getJson(`${appConfig.apiHost}/catalog/featured-products?count=4`, {
+		ttl: 15 // minutes
+	});
+}
+
 export function getCategoryDetails(categoryId) {
 	return ajax.getJson(`${appConfig.apiHost}/catalog/category/${categoryId}`, {
 		ttl: 60 // minutes

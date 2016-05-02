@@ -1,14 +1,14 @@
 import React from 'react';
 
-import Logger from '../../plugins/logger';
+import Logger from '../../../plugins/logger';
 
-import * as catalogApi from '../../api/catalog';
-import * as shopApi from '../../api/shop';
+import * as catalogApi from '../../../api/catalog';
+import * as shopApi from '../../../api/shop';
 
-import ProductSummary from './product-summary';
+import ProductSummary from '../shared/product-summary';
 import HomeInfo from './home-info';
 
-import '../../../styles/pages/catalog/home-page.css';
+import '../../../../styles/pages/catalog/home-page.css';
 
 const logger = new Logger('HomePage');
 

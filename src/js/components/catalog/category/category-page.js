@@ -1,14 +1,14 @@
 import React from 'react';
 
-import Logger from '../../plugins/logger';
+import Logger from '../../../plugins/logger';
 
-import * as catalogApi from '../../api/catalog';
+import * as catalogApi from '../../../api/catalog';
 
-import ProductSummary from './product-summary';
-import ProductsMiniList from './products-mini-list';
-import NewsletterSubscribe from './newsletter-subscribe';
+import ProductSummary from '../shared/product-summary';
+import ProductsMiniList from '../shared/products-mini-list';
+import NewsletterSubscribe from '../shared/newsletter-subscribe';
 
-import '../../../styles/pages/catalog/category-page.css';
+import '../../../../styles/pages/catalog/category-page.css';
 
 const logger = new Logger('CategoryPage');
 
@@ -19,7 +19,8 @@ class CategoryPage extends React.Component {
 
 		this.state = {
 			category: undefined,
-			products: [],
+			categoryProducts: [],
+			popularProducts: [],
 			categories: []
 		};
 	}
@@ -30,14 +31,16 @@ class CategoryPage extends React.Component {
 			Promise.all([
 				catalogApi.getCategoryDetails(request.params.categoryId),
 				catalogApi.getCategoryProducts(request.params.categoryId),
+				catalogApi.getPopularProducts(),
 				catalogApi.getCategories()
 			])
 			.then(values => {
 				logger.debug('This is received data:', values[0], values[2]);
 				resolve({
 					category: values[0],
-					products: values[1],
-					categories: values[2]
+					categoryProducts: values[1],
+					popularProducts: values[2],
+					categories: values[3]
 				});
 			})
 			.catch(reject);
@@ -45,16 +48,21 @@ class CategoryPage extends React.Component {
 	}
 
 	render() {
-		const products = this.props.pageData.products.map((product, index) => {
+		const pageData = this.props.pageData;
+
+		const products = pageData.categoryProducts.map((product, index) => {
 			return (<ProductSummary product={product} key={index} />);
 		});
 
-		const categories = this.props.pageData.categories.map((category, index) => {
+		const categories = pageData.categories.map((category, index) => {
 			return (<li key={index}><a href={`/category/${category.name}/${category.id}`}>{category.name}</a></li>);
 		});
 
-		const popularProducts = []; // TODO
 		const lastViewedProducts = []; // TODO
+		let lastViewedProductsList;
+		if (lastViewedProducts.length) {
+			lastViewedProductsList = (<ProductsMiniList products={lastViewedProducts} title="Last viewed items" />);
+		}
 
 		return (
 			<div className="content-wrap category-page">
@@ -83,9 +91,9 @@ class CategoryPage extends React.Component {
 
 							</div>
 
-							<ProductsMiniList products={popularProducts} title="Popular items" />
+							<ProductsMiniList products={pageData.popularProducts} title="Popular items" />
 
-							<ProductsMiniList products={lastViewedProducts} title="LAst viewed items" />
+							{lastViewedProductsList}
 
 							<NewsletterSubscribe />
 

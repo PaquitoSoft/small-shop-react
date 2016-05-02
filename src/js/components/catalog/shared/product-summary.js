@@ -1,5 +1,5 @@
 import React from 'react';
-import appConfig from '../../config/app-config';
+import appConfig from '../../../config/app-config';
 
 class ProductSummary extends React.Component {
 
