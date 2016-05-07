@@ -3,11 +3,15 @@ import {getProductImageUrl} from '../../../plugins/url-builder';
 
 export default function ProductsMiniList({title, products: productsList}) {
 
+	if (!productsList || !productsList.length) {
+		return null;
+	}
+
 	const products = productsList.map((product, index) => {
 		return (
-			<div className="spost clearfix" key={index}>
+			<div className="spost clearfix product-mini-list" key={index}>
 				<div className="entry-image">
-					<a href="#"><img src={getProductImageUrl(product.id, product.imagesUrls[0])} alt="Image" /></a>
+					<a href="#"><img className="product-image" src={getProductImageUrl(product, 0)} alt="Image" /></a>
 				</div>
 				<div className="entry-c">
 					<div className="entry-title">
@@ -15,7 +19,6 @@ export default function ProductsMiniList({title, products: productsList}) {
 					</div>
 					<ul className="entry-meta">
 						<li className="color">{product.price}€</li>
-						<li><i className="icon-star3"></i> <i className="icon-star3"></i> <i className="icon-star3"></i> <i className="icon-star3"></i> <i className="icon-star-half-full"></i></li>
 					</ul>
 				</div>
 			</div>

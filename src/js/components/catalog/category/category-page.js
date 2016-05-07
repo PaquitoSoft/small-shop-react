@@ -5,8 +5,7 @@ import Logger from '../../../plugins/logger';
 import * as catalogApi from '../../../api/catalog';
 
 import ProductSummary from '../shared/product-summary';
-import ProductsMiniList from '../shared/products-mini-list';
-import NewsletterSubscribe from '../shared/newsletter-subscribe';
+import Sidebar from '../shared/sidebar';
 
 import '../../../../styles/pages/catalog/category-page.css';
 
@@ -79,26 +78,12 @@ class CategoryPage extends React.Component {
 						</div>
 					</div>
 
-					<div className="sidebar nobottommargin">
-						<div className="sidebar-widgets-wrap">
-
-							<div className="widget widget_links clearfix">
-
-								<h4>Shop Categories</h4>
-								<ul>
-									{categories}
-								</ul>
-
-							</div>
-
-							<ProductsMiniList products={pageData.popularProducts} title="Popular items" />
-
-							{lastViewedProductsList}
-
-							<NewsletterSubscribe />
-
-						</div>
-					</div>
+					{/* TODO Pass last viewed items */}
+					<Sidebar
+						categories={pageData.categories}
+						popularProducts={pageData.popularProducts}
+						lastViewedProductsList={[]}
+					/>
 
 				</div>
 
