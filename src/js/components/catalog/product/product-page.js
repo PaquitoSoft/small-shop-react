@@ -1,6 +1,8 @@
 import React from 'react';
 import Logger from '../../../plugins/logger';
+import events from '../../../plugins/events-bus';
 import * as catalogApi from '../../../api/catalog';
+import * as shopCartApi from '../../../api/shop';
 
 import ProductDetailGallery from './product-detail-gallery';
 import ProductDetailMainInfo from './product-detail-main-info';
@@ -27,14 +29,6 @@ class ProductPage extends React.Component {
 		this.addToCartHandler = this.onAddToCart.bind(this);
 	}
 
-	onColorSelected(color) {
-		logger.info('Selected color:', color);
-	}
-
-	onAddToCart(quantity) {
-		logger.info('TODO: Add product to cart... Quantity: ' + quantity);
-	}
-
 	static loadPageData(request) {
 		logger.debug("Let's load product page required data...");
 		return new Promise((resolve, reject) => {
@@ -54,9 +48,38 @@ class ProductPage extends React.Component {
 		});
 	}
 
+	componentWillReceiveProps(newProps) {
+		this.setState({
+			selectedColor: newProps.pageData.product.colors[0].id,
+			selectedSize: newProps.pageData.product.sizes[0].id
+		});
+	}
+
+	onColorSelected(color) {
+		logger.info('Selected color:', color);
+	}
+
+	onAddToCart(quantity) {
+		shopCartApi.addProductToCart({
+				productId: +this.props.pageData.product.id,
+				colorId: this.state.selectedColor,
+				sizeId: this.state.selectedSize,
+				quantity
+			})
+			.then(data => {
+				// TODO Show success + notify mini shop cart
+				logger.debug('Product added to cart:', data);
+				events.bus.emit(events.types.PRODUCT_ADDED_TO_CART, data.result);
+			})
+			.catch(err => {
+				// TODO Show error
+				logger.error('Could not add product to cart:', err);
+			});
+	}
+
 	render() {
 		const product = this.props.pageData.product;
-		
+
 		return (
 			<div className="content-wrap product-page">
 
@@ -84,7 +107,10 @@ class ProductPage extends React.Component {
 									<div className="line"></div>
 
 									<SizeSelector sizes={product.sizes} />
-									<div className="line"></div>
+									{product.sizes.length > 1 ?
+										<div className="line"></div> :
+										null
+									}
 
 									<AddProductToCart onAddProduct={this.addToCartHandler}/>
 									<div className="line"></div>

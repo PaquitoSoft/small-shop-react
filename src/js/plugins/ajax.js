@@ -86,16 +86,18 @@ export function getHtml(url, options) {
 	return getData(url, documentParser.bind(null, 'text/html'), options);
 }
 
-export function putJson(url, data) {
+export function postJson(url, data) {
 	return fetch(url, {
-			method: 'put',
+			method: 'post',
 			headers: {
 				'Accept': 'application/json',
 				'Content-Type': 'application/json'
 			},
+			credentials: 'include',
 			body: JSON.stringify(data)
 		})
-		.then(checkResponseStatus);
+		.then(checkResponseStatus)
+		.then(parseJson);
 }
 
 

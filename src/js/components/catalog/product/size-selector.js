@@ -5,7 +5,6 @@ export default function SizeSelector({sizes: sizesList}) {
 		return (<option key={index} value={size.id}>{size.name}</option>);
 	});
 
-	// TODO Must disable sizes which are not available for selected color
 	return (
 		<div className="size-selector">
 			<div className="title">Select your size:</div>
