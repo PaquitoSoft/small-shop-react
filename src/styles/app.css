@@ -13,3 +13,9 @@
 .navigation-categories:hover .mega-menu-content {
 	display: block !important;
 }
+
+.product-mini-list .product-image {
+	width: 48px;
+	float: left;
+	margin-right: 15px;
+}

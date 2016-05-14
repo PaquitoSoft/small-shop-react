@@ -9,8 +9,8 @@ export default function ProductsMiniList({title, products: productsList}) {
 
 	const products = productsList.map((product, index) => {
 		return (
-			<div className="spost clearfix product-mini-list" key={index}>
-				<div className="entry-image">
+			<div className="spost clearfix" key={index}>
+				<div className="">
 					<a href="#"><img className="product-image" src={getProductImageUrl(product, 0)} alt="Image" /></a>
 				</div>
 				<div className="entry-c">
@@ -26,7 +26,7 @@ export default function ProductsMiniList({title, products: productsList}) {
 	});
 
 	return (
-		<div className="widget clearfix">
+		<div className="widget clearfix product-mini-list">
 			<h4>{title}</h4>
 			<div id="post-list-footer">
 				{products}
