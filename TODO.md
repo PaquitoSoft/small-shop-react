@@ -4,9 +4,12 @@
 * Mini-cart
 * Last-viewed items
 * Extract CSS to external files
-* Reload page when code changes
-* Hot Module Replacement (webpack)
 * Add to cart/Quick view in product summary???
 * Subscribe newsletter
-* Langauges
+* Testing
+* Languages
 * Login
+
+# DONE
+* Hot Module Replacement (webpack)
+* Reload page when code changes

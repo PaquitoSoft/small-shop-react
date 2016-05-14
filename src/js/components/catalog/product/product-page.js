@@ -3,6 +3,7 @@ import Logger from '../../../plugins/logger';
 import * as catalogApi from '../../../api/catalog';
 
 import ProductDetailGallery from './product-detail-gallery';
+import ProductDetailMainInfo from './product-detail-main-info';
 import ColorSelector from './color-selector';
 import SizeSelector from './size-selector';
 import AddProductToCart from './add-product-to-cart';
@@ -14,8 +15,13 @@ const logger = new Logger('CategoryPage');
 
 class ProductPage extends React.Component {
 
-	constructor() {
+	constructor(props) {
 		super();
+
+		this.state = {
+			selectedColor: props.pageData.product.colors[0].id,
+			selectedSize: props.pageData.product.sizes[0].id
+		};
 
 		this.selectColorHandler = this.onColorSelected.bind(this);
 		this.addToCartHandler = this.onAddToCart.bind(this);
@@ -25,9 +31,8 @@ class ProductPage extends React.Component {
 		logger.info('Selected color:', color);
 	}
 
-	onAddToCart(event) {
-		logger.info('TODO: Add product to cart...');
-		event.preventDefault();
+	onAddToCart(quantity) {
+		logger.info('TODO: Add product to cart... Quantity: ' + quantity);
 	}
 
 	static loadPageData(request) {
@@ -51,7 +56,7 @@ class ProductPage extends React.Component {
 
 	render() {
 		const product = this.props.pageData.product;
-
+		
 		return (
 			<div className="content-wrap product-page">
 
@@ -69,25 +74,16 @@ class ProductPage extends React.Component {
 
 								<div className="col_half col_last product-desc">
 
-									<div>
-										<span className="product-name">{product.name}</span>
-										<div className="price-info">
-											<span>Price:</span>
-											<span className="price">{product.price}€</span>
-										</div>
-									</div><div className="line"></div>
-
-									<div className="color-selector">
-										<ColorSelector
-											colors={product.colors}
-											onColorSelected={this.selectColorHandler}
-										/>
-									</div>
+									<ProductDetailMainInfo product={product} />
 									<div className="line"></div>
 
-									<div className="size-selector">
-										<SizeSelector sizes={product.sizes} />
-									</div>
+									<ColorSelector
+										colors={product.colors}
+										onColorSelected={this.selectColorHandler}
+									/>
+									<div className="line"></div>
+
+									<SizeSelector sizes={product.sizes} />
 									<div className="line"></div>
 
 									<AddProductToCart onAddProduct={this.addToCartHandler}/>

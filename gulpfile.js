@@ -89,7 +89,7 @@ gulp.task('webpack-dev-server', function(callback) {
 			colors: true
 		},
 		historyApiFallback: true,
-		// inline: true,
+		inline: true,
 		hot: true,
 		contentBase: './dist'
 	};

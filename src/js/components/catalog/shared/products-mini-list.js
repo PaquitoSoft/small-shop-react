@@ -1,5 +1,5 @@
 import React from 'react';
-import {getProductImageUrl} from '../../../plugins/url-builder';
+import {getProductUrl, getProductImageUrl} from '../../../plugins/url-builder';
 
 export default function ProductsMiniList({title, products: productsList}) {
 
@@ -8,14 +8,15 @@ export default function ProductsMiniList({title, products: productsList}) {
 	}
 
 	const products = productsList.map((product, index) => {
+		const productUrl = getProductUrl(product);
 		return (
 			<div className="spost clearfix" key={index}>
 				<div className="">
-					<a href="#"><img className="product-image" src={getProductImageUrl(product, 0)} alt="Image" /></a>
+					<a href={productUrl}><img className="product-image" src={getProductImageUrl(product, 0)} alt="Image" /></a>
 				</div>
 				<div className="entry-c">
 					<div className="entry-title">
-						<h4><a href="#">{product.name}</a></h4>
+						<h4><a href={productUrl}>{product.name}</a></h4>
 					</div>
 					<ul className="entry-meta">
 						<li className="color">{product.price}€</li>

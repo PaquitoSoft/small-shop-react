@@ -6,7 +6,7 @@ export default function ColorSelector({colors: colorsList, onColorSelected}) {
 	const colors = colorsList.map((color, index) => {
 		return (
 			<li key={index} className={`product-color ${!index ? 'selected' : ''}`} onClick={onColorSelected.bind(null, color)}>
-				<img src={getProductColorImage(color.id)} alt={color.name} title={color.name} />
+				<img width="36" height="36" src={getProductColorImage(color.id)} alt={color.name} title={color.name} />
 			</li>
 		);
 	});

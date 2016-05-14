@@ -11,6 +11,12 @@ class ProductDetailGallery extends React.Component {
 		};
 	}
 
+	componentWillReceiveProps(newProps) {
+		this.setState({
+			selectedImageUrl: getProductImageUrl(newProps.product, 0)
+		});
+	}
+
 	updateSelectedImage(imageIndex) {
 		this.setState({
 			selectedImageUrl: getProductImageUrl(this.props.product, imageIndex)
@@ -19,6 +25,7 @@ class ProductDetailGallery extends React.Component {
 
 	render() {
 		const product = this.props.product;
+		
 		const thumbnails = product.imagesUrls.map((image, index) => {
 			return (
 				<li key={index}>
@@ -32,19 +39,13 @@ class ProductDetailGallery extends React.Component {
 
 		return (
 			<div className="product-image product-gallery">
-				<div className="">
-					<div className="">
-						<div className="">
-							<div className="">
-								<div className="">
-									<img src={this.state.selectedImageUrl} alt={product.name}/>
-								</div>
-							</div>
-						</div>
-						<ol className="thumbnails">
-							{thumbnails}
-						</ol>
+				<div>
+					<div>
+						<img src={this.state.selectedImageUrl} alt={product.name}/>
 					</div>
+					<ol className="thumbnails">
+						{thumbnails}
+					</ol>
 				</div>
 			</div>
 		);
