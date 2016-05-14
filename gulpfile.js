@@ -68,6 +68,16 @@ gulp.task('copy:images', function() {
 
 // Development server
 gulp.task('webpack-dev-server', function(callback) {
+
+	// Custom configuration for Hot Module Replacement
+	// http://gaearon.github.io/react-hot-loader/getstarted/
+	webpackConfig.entry.push(
+		'webpack-dev-server/client?http://0.0.0.0:8080', // WebpackDevServer host and port
+		'webpack/hot/only-dev-server' // "only" prenvet reload on syntax errors
+	);
+	webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
+	webpackConfig.module.loaders[0].loaders.unshift('react-hot');
+
 	// Webpack compiler with its configuration
 	var config = Object.create(webpackConfig);
 	// config.debug = true;
@@ -79,8 +89,8 @@ gulp.task('webpack-dev-server', function(callback) {
 			colors: true
 		},
 		historyApiFallback: true,
-		inline: true,
-		// hot: true,
+		// inline: true,
+		hot: true,
 		contentBase: './dist'
 	};
 

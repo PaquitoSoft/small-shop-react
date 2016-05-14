@@ -3,7 +3,7 @@ var precss = require('precss');
 var autoprefixer = require('autoprefixer');
 
 module.exports = {
-	entry: './src/js/main.js',
+	entry: ['./src/js/main.js'],
 	output: {
 		path: require('path').resolve('./dist/js'),
 		filename: 'app-dist.js',
@@ -15,10 +15,12 @@ module.exports = {
 			{
 				test: /\.jsx?$/,
 				exclude: /(node_modules)/,
-				loader: 'babel',
-				query: {
-					presets: ['es2015', 'react']
-				}
+				// loader: 'babel',
+				// query: {
+				// 	presets: ['es2015', 'react']
+				// }
+				// http://gaearon.github.io/react-hot-loader/getstarted/
+				loaders: ['babel?presets[]=es2015,presets[]=react']
 			},
 			{
 				test: /\.css$/,
