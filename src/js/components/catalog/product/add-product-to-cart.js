@@ -4,7 +4,10 @@ class AddProductToCart extends React.Component {
 
 	constructor() {
 		super();
-		this.state = {quantity: 1};
+		this.state = {
+			quantity: 1,
+			successMessageHidden: true
+		};
 	}
 
 	onQuantityClick(action) {
@@ -16,7 +19,12 @@ class AddProductToCart extends React.Component {
 
 	onProductAdd(event) {
 		event.preventDefault();
-		this.props.onAddProduct(this.state.quantity);
+		this.props.onAddProduct(this.state.quantity, () => {
+			this.setState({successMessageHidden: false});
+			setTimeout(() => {
+				this.setState({successMessageHidden: true});
+			}, 1500);
+		});
 	}
 
 	render() {
@@ -28,6 +36,9 @@ class AddProductToCart extends React.Component {
 					<input type="button" defaultValue="+" className="plus" onClick={this.onQuantityClick.bind(this, 'add')}/>
 				</div>
 				<button type="submit" className="add-to-cart button nomargin" onClick={this.onProductAdd.bind(this)}>Add to cart</button>
+					<span className={`label product-added-msg ${this.state.successMessageHidden ? 'hidden': ''}`}>
+						Product added
+					</span>
 			</form>
 		);
 	}

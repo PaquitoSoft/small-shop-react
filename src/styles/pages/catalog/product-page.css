@@ -27,6 +27,12 @@
 		margin-left: 5px;
 	}
 
+	.product-added-msg {
+		background-color: #000;
+		font-size: 13px;
+	    margin-left: 5px;
+	}
+
 	.color-selector {
 		.title {
 			margin-bottom: 10px;

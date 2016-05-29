@@ -15,6 +15,8 @@ import '../../../../styles/pages/catalog/product-page.css';
 
 const logger = new Logger('CategoryPage');
 
+// TODO Navigate through category's products
+
 class ProductPage extends React.Component {
 
 	constructor(props) {
@@ -48,6 +50,13 @@ class ProductPage extends React.Component {
 		});
 	}
 
+	componentDidMount() {
+		this.setState({
+			selectedColor: this.props.pageData.product.colors[0].id,
+			selectedSize: this.props.pageData.product.sizes[0].id
+		});
+	}
+
 	componentWillReceiveProps(newProps) {
 		this.setState({
 			selectedColor: newProps.pageData.product.colors[0].id,
@@ -59,21 +68,24 @@ class ProductPage extends React.Component {
 		logger.info('Selected color:', color);
 	}
 
-	onAddToCart(quantity) {
-		shopCartApi.addProductToCart({
-				productId: +this.props.pageData.product.id,
-				colorId: this.state.selectedColor,
-				sizeId: this.state.selectedSize,
-				quantity
-			})
+	onAddToCart(quantity, done) {
+		let orderItem = {
+			productId: this.props.pageData.product.id,
+			colorId: this.state.selectedColor,
+			sizeId: this.state.selectedSize,
+			quantity
+		};
+		shopCartApi.addProductToCart(orderItem)
 			.then(data => {
 				// TODO Show success + notify mini shop cart
-				logger.debug('Product added to cart:', data);
-				events.bus.emit(events.types.PRODUCT_ADDED_TO_CART, data.result);
+				logger.debug('Product added to cart:', data.detail);
+				events.bus.emit(events.types.PRODUCT_ADDED_TO_CART, data);
+				done();
 			})
 			.catch(err => {
 				// TODO Show error
 				logger.error('Could not add product to cart:', err);
+				console.warn(err.stack);
 			});
 	}
 
