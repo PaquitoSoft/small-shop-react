@@ -2,6 +2,7 @@ import React from 'react';
 import Logger from '../../plugins/logger';
 import events from '../../plugins/events-bus';
 import * as shopCartApi from '../../api/shop';
+import {getProductUrl, getProductImageUrl} from '../../plugins/url-builder';
 
 const logger = new Logger('ShopCart');
 
@@ -23,7 +24,6 @@ class MiniCart extends React.Component {
 
 		shopCartApi.getShopCart()
 			.then(shopCart => {
-				console.log('Setting new Shop Cart:', shopCart);
 				this.setState({shopCart});
 			})
 			.catch(err => {
@@ -35,14 +35,42 @@ class MiniCart extends React.Component {
 		events.bus.removeListener(events.types.PRODUCT_ADDED_TO_CART, this.handleProductAddedToCart);
 	}
 
-	onProductAddedToCart(shopCart) {
-		this.setState({ shopCart });
+	onProductAddedToCart(addedOrderItem) {
+		const orderItemIndex = this.state.shopCart.orderItems.findIndex(orderItem => orderItem.id === addedOrderItem.id);
+		let shopCart = this.state.shopCart;
+
+		if (orderItemIndex !== -1) {
+			shopCart.orderItems.splice(orderItemIndex, 1, addedOrderItem);
+		} else {
+			shopCart.orderItems.push(addedOrderItem);
+		}
+
+		this.setState({shopCart});
 	}
 
 	render() {
-		const units = this.state.shopCart.orderItems.reduce((total, orderItem) => {
-			return total += orderItem.quantity;
-		}, 0);
+		let units = 0,
+			totalAmount = 0;
+
+		const orderItems = this.state.shopCart.orderItems.map((orderItem, index) => {
+			const productUrl = getProductUrl(orderItem.detail);
+
+			units += orderItem.quantity;
+			totalAmount += (orderItem.quantity * orderItem.detail.price);
+
+			return (
+				<div className="top-cart-item clearfix" key={index}>
+					<div className="top-cart-item-image">
+						<a href={productUrl}><img src={getProductImageUrl(orderItem.detail, 0)} alt={orderItem.detail.name} /></a>
+					</div>
+					<div className="top-cart-item-desc">
+						<a href={productUrl}>{orderItem.detail.name}</a>
+						<span className="top-cart-item-price">{orderItem.detail.price}€</span>
+						<span className="top-cart-item-quantity">x {orderItem.quantity}</span>
+					</div>
+				</div>
+			);
+		});
 
 		return (
 			<div id="top-cart">
@@ -54,29 +82,10 @@ class MiniCart extends React.Component {
 						<h4>Shopping Cart</h4>
 					</div>
 					<div className="top-cart-items">
-						<div className="top-cart-item clearfix">
-							<div className="top-cart-item-image">
-								<a href="#"><img src="/images/shop/small/1.jpg" alt="Blue Round-Neck Tshirt" /></a>
-							</div>
-							<div className="top-cart-item-desc">
-								<a href="#">Blue Round-Neck Tshirt</a>
-								<span className="top-cart-item-price">$19.99</span>
-								<span className="top-cart-item-quantity">x 2</span>
-							</div>
-						</div>
-						<div className="top-cart-item clearfix">
-							<div className="top-cart-item-image">
-								<a href="#"><img src="/images/shop/small/6.jpg" alt="Light Blue Denim Dress" /></a>
-							</div>
-							<div className="top-cart-item-desc">
-								<a href="#">Light Blue Denim Dress</a>
-								<span className="top-cart-item-price">$24.99</span>
-								<span className="top-cart-item-quantity">x 3</span>
-							</div>
-						</div>
+						{orderItems}
 					</div>
 					<div className="top-cart-action clearfix">
-						<span className="fleft top-checkout-price">$114.95</span>
+						<span className="fleft top-checkout-price">{totalAmount.toFixed(2)}€</span>
 						<button className="button button-3d button-small nomargin fright">View Cart</button>
 					</div>
 				</div>

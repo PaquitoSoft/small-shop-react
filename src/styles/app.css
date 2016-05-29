@@ -10,6 +10,16 @@
 	min-height: 565px;
 }
 
+.widget_links li a {
+	background: none;
+}
+
+.top-cart-item-image {
+	&, & a, & img {
+		height: auto !important;
+	}
+}
+
 .navigation-categories:hover .mega-menu-content {
 	display: block !important;
 }
