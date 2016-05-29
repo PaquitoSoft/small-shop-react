@@ -1,6 +1,8 @@
 import React from 'react';
 
 export default function SizeSelector({sizes: sizesList}) {
+	if (sizesList.length < 2) return null;
+
 	const sizes = sizesList.map((size, index) => {
 		return (<option key={index} value={size.id}>{size.name}</option>);
 	});
