@@ -63,7 +63,7 @@ function getData(url, responseParser, options = {ttl: 0}) {
 	if (data) {
 		return Promise.resolve(data);
 	} else {
-		return fetch(url)
+		return fetch(url, {credentials: 'include'})
 			.then(checkResponseStatus)
 			.then(responseParser)
 			.then(cacheResponse(options.ttl, url));
