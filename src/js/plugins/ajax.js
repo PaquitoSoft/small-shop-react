@@ -97,7 +97,8 @@ export function postJson(url, data) {
 			body: JSON.stringify(data)
 		})
 		.then(checkResponseStatus)
-		.then(parseJson);
+		.then(parseJson)
+		.then((data) => data.result);
 }
 
 
