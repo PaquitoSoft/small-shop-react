@@ -4,6 +4,8 @@ import events from '../../plugins/events-bus';
 import * as shopCartApi from '../../api/shop';
 import {getProductUrl, getProductImageUrl} from '../../plugins/url-builder';
 
+import Router from '../helpers/router';
+
 const logger = new Logger('ShopCart');
 
 class MiniCart extends React.Component {
@@ -36,6 +38,7 @@ class MiniCart extends React.Component {
 	}
 
 	onProductAddedToCart(addedOrderItem) {
+		// TODO Color and size must also be checked
 		const orderItemIndex = this.state.shopCart.orderItems.findIndex(orderItem => orderItem.id === addedOrderItem.id);
 		let shopCart = this.state.shopCart;
 
@@ -48,6 +51,10 @@ class MiniCart extends React.Component {
 		this.setState({shopCart});
 	}
 
+	navToShopCart() {
+		Router.navTo('/shop-cart');
+	}
+
 	render() {
 		let units = 0,
 			totalAmount = 0;
@@ -58,6 +65,7 @@ class MiniCart extends React.Component {
 			units += orderItem.quantity;
 			totalAmount += (orderItem.quantity * orderItem.detail.price);
 
+			// TODO: Show color and size for every item
 			return (
 				<div className="top-cart-item clearfix" key={index}>
 					<div className="top-cart-item-image">
@@ -74,7 +82,7 @@ class MiniCart extends React.Component {
 
 		return (
 			<div id="top-cart">
-				<a href="#" id="top-cart-trigger">
+				<a href="/shop-cart" id="top-cart-trigger">
 					<i className="icon-shopping-cart"></i><span>{units}</span>
 				</a>
 				<div className="top-cart-content">
@@ -86,7 +94,7 @@ class MiniCart extends React.Component {
 					</div>
 					<div className="top-cart-action clearfix">
 						<span className="fleft top-checkout-price">{totalAmount.toFixed(2)}€</span>
-						<button className="button button-3d button-small nomargin fright">View Cart</button>
+						<button className="button button-3d button-small nomargin fright" onClick={this.navToShopCart}>View Cart</button>
 					</div>
 				</div>
 			</div>

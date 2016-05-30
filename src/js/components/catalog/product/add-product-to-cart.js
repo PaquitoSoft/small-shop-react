@@ -22,6 +22,7 @@ class AddProductToCart extends React.Component {
 		this.props.onAddProduct(this.state.quantity, () => {
 			this.setState({successMessageHidden: false});
 			setTimeout(() => {
+				// TODO: This might happen when the component has been unmounted
 				this.setState({successMessageHidden: true});
 			}, 1500);
 		});

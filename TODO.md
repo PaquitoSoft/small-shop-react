@@ -5,6 +5,7 @@
 * Global loader indicator
 * Last-viewed items
 * Show errors
+* Category -> Lazy load images
 * Extract CSS to external files
 * Add to cart/Quick view in product summary???
 * Subscribe newsletter

@@ -20,6 +20,10 @@ class Router extends React.Component {
 		});
 	}
 
+	static navTo(url) {
+		routerEngine(url);
+	}
+
 	handleRouteChange(pageModulePath, routeContext) {
 		logger.debug('handleRouteChange# Navigating to:', pageModulePath, routeContext);
 
