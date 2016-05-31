@@ -14,7 +14,6 @@ class ShopCartPage extends React.Component {
 
 	constructor(props) {
 		super();
-		// this.state = {shopCart: props.pageData.shopCart};
 	}
 
 	static loadPageData() {
@@ -32,7 +31,7 @@ class ShopCartPage extends React.Component {
 
 	orderItemRemovedHandler(orderItem) {
 		logger.warn('TODO: Handle orderItem remove');
-		const orderItemIndex = this.state.shopCart.findIndex(_orderItem => _orderItem.id === orderItem.id);
+		const orderItemIndex = this.state.shopCart.orderItems.findIndex(_orderItem => _orderItem.id === orderItem.id);
 		let shopCart = Object.assign({}, this.state.shopCart);
 		if (orderItemIndex !== -1) {
 			// TODO Call server
