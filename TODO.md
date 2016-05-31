@@ -2,6 +2,9 @@
 # TODO
 * Select current category (top and sidebar navigation)
 * Shop cart page
+* Handle color and size
+** Add to cart
+** MiniCart
 * Global loader indicator
 * Last-viewed items
 * Show errors
@@ -17,7 +20,7 @@
 * Hot Module Replacement (webpack)
 * Reload page when code changes
 * Mini-cart
-
+* Deploy (runtime configurations)
 
 
 
