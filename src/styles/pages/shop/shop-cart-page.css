@@ -2,4 +2,10 @@
 	.cart-product-thumbnail img {
 		height: auto;
 	}
+
+	.cart-product-name {
+		.product-name {
+			font-size: 15px;
+		}
+	}
 }
