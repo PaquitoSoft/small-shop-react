@@ -78,6 +78,12 @@ gulp.task('webpack-dev-server', function(callback) {
 	webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
 	webpackConfig.module.loaders[0].loaders.unshift('react-hot');
 
+	webpackConfig.plugins.push(new webpack.DefinePlugin({
+		'process.env': {
+			'NODE_ENV': JSON.stringify('development')
+		}
+	}));
+
 	// Webpack compiler with its configuration
 	var config = Object.create(webpackConfig);
 	// config.debug = true;
