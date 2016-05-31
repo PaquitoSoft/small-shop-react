@@ -2,7 +2,7 @@ import appConfig from '../config/app-config';
 import * as ajax from '../plugins/ajax';
 
 export function getHomeBanner() {
-	return ajax.getText(`${appConfig.staticContentBasePath}/content/catalog/home-banner.html`, {
+	return ajax.getText(`${appConfig.apiHost}/static/content/catalog/home-banner.html`, {
 		ttl: 24 * 60 // minutes
 	});
 }
