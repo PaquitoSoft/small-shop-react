@@ -1,7 +1,7 @@
 import React from 'react';
 import Logger from '../../../plugins/logger';
 import events from '../../../plugins/events-bus';
-import {getShopCart} from '../../../api/shop';
+import {getShopCart, removeOrderItem} from '../../../api/shop';
 
 import OrderItem from './order-item';
 import ShopCartTotals from './shop-cart-totals';
@@ -30,12 +30,19 @@ class ShopCartPage extends React.Component {
 	}
 
 	orderItemRemovedHandler(orderItem) {
-		logger.warn('TODO: Handle orderItem remove');
-		const orderItemIndex = this.state.shopCart.orderItems.findIndex(_orderItem => _orderItem.id === orderItem.id);
-		let shopCart = Object.assign({}, this.state.shopCart);
-		if (orderItemIndex !== -1) {
-			// TODO Call server
-		}
+		logger.debug('TODO: Handle orderItem remove:', orderItem.id);
+
+		removeOrderItem(orderItem.id)
+			.then(shopCart => {
+				debugger;
+				this.setState({shopCart}, () => {
+					events.bus.emit(events.types.SHOP_CART_UPDATED, shopCart);
+				});
+			})
+			.catch(err => {
+				logger.warn('Error removing order-item:', err);
+				console.log(err.stack);
+			});
 	}
 
 	orderItemUpdatedHandler(orderItem, done) {
@@ -44,6 +51,11 @@ class ShopCartPage extends React.Component {
 
 	render() {
 		const shopCart = this.state.shopCart;
+
+		if (!shopCart.orderItems.length) {
+			// TODO Handle empty shop cart
+			return null;
+		}
 
 		const orderItems = shopCart.orderItems.map((orderItem, index) => {
 			return (

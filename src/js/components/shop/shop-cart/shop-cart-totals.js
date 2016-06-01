@@ -4,7 +4,7 @@ export default function ShopCartTotals({shopCart}) {
 	const totalAmount = shopCart.orderItems.reduce((total, orderItem) => {
 		total += (orderItem.detail.price * orderItem.quantity);
 		return total;
-	}, 0);
+	}, 0).toFixed(2);
 
 	return (
 		<div className="table-responsive shop-cart-totals">

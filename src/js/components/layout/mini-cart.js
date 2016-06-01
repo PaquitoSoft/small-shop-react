@@ -18,11 +18,11 @@ class MiniCart extends React.Component {
 				orderItems: []
 			}
 		};
-		this.handleProductAddedToCart = this.onProductAddedToCart.bind(this);
+		this.onShopCartUpdated = this.onShopCartUpdated.bind(this);
 	}
 
 	componentDidMount() {
-		events.bus.on(events.types.PRODUCT_ADDED_TO_CART, this.handleProductAddedToCart);
+		events.bus.on(events.types.SHOP_CART_UPDATED, this.onShopCartUpdated);
 
 		shopCartApi.getShopCart()
 			.then(shopCart => {
@@ -34,20 +34,11 @@ class MiniCart extends React.Component {
 	}
 
 	componentWillUnmount() {
-		events.bus.removeListener(events.types.PRODUCT_ADDED_TO_CART, this.handleProductAddedToCart);
+		events.bus.removeListener(events.types.SHOP_CART_UPDATED, this.onShopCartUpdated);
 	}
 
-	onProductAddedToCart(addedOrderItem) {
-		// TODO Color and size must also be checked
-		const orderItemIndex = this.state.shopCart.orderItems.findIndex(orderItem => orderItem.id === addedOrderItem.id);
-		let shopCart = this.state.shopCart;
-
-		if (orderItemIndex !== -1) {
-			shopCart.orderItems.splice(orderItemIndex, 1, addedOrderItem);
-		} else {
-			shopCart.orderItems.push(addedOrderItem);
-		}
-
+	onShopCartUpdated(shopCart) {
+		debugger;
 		this.setState({shopCart});
 	}
 

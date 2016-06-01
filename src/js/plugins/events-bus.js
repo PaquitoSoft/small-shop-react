@@ -5,7 +5,7 @@ class EventsBus extends EventEmitter {}
 const appEventsBus = new EventsBus();
 
 const eventsTypes = {
-	PRODUCT_ADDED_TO_CART: 'PRODUCT_ADDED_TO_CART'
+	SHOP_CART_UPDATED: 'SHOP_CART_UPDATED'
 };
 
 export default {

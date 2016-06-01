@@ -101,6 +101,16 @@ export function postJson(url, data) {
 		.then((data) => data.result);
 }
 
+export function remove(url) {
+	return fetch(url, {
+			method: 'delete',
+			credentials: 'include'
+		})
+		.then(checkResponseStatus)
+		.then(parseJson)
+		.then((data) => data.result);
+}
+
 
 /*
 	Idea from http://blog.garstasio.com/you-dont-need-jquery/ajax/#jsonp

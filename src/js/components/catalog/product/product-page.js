@@ -76,10 +76,9 @@ class ProductPage extends React.Component {
 			quantity
 		};
 		shopCartApi.addProductToCart(orderItem)
-			.then(data => {
-				// TODO Show success + notify mini shop cart
-				logger.debug('Product added to cart:', data.detail);
-				events.bus.emit(events.types.PRODUCT_ADDED_TO_CART, data);
+			.then(shopCart => {
+				// TODO Show success
+				events.bus.emit(events.types.SHOP_CART_UPDATED, shopCart);
 				done();
 			})
 			.catch(err => {
