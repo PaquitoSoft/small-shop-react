@@ -10,11 +10,11 @@
 * Show errors
 * Category -> Lazy load images
 * Extract CSS to external files
-* Add to cart/Quick view in product summary???
-* Subscribe newsletter
+* Subscribe newsletter -> Confirmation popup
+* Reset color, size and quantity selection when changing form product to product
+* Product change size lasts too long
 * Testing
 * i18n
-* Login???
 
 # DONE
 * Hot Module Replacement (webpack)
