@@ -49,7 +49,7 @@ class HomePage extends React.Component {
 
 				<div className="container clearfix">
 
-					<div dangerouslySetInnerHTML={{__html: this.props.pageData.banner}}></div>
+					<div className="home-banner-container" dangerouslySetInnerHTML={{__html: this.props.pageData.banner}}></div>
 
 					<div className="tabs topmargin-lg clearfix" id="tab-3">
 						<ul className="tab-nav clearfix">
