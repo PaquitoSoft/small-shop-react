@@ -86,9 +86,9 @@ export function getHtml(url, options) {
 	return getData(url, documentParser.bind(null, 'text/html'), options);
 }
 
-export function postJson(url, data) {
+function sendData(url, data, method = 'post') {
 	return fetch(url, {
-			method: 'post',
+			method,
 			headers: {
 				'Accept': 'application/json',
 				'Content-Type': 'application/json'
@@ -99,6 +99,14 @@ export function postJson(url, data) {
 		.then(checkResponseStatus)
 		.then(parseJson)
 		.then((data) => data.result);
+}
+
+export function postJson(url, data) {
+	return sendData(url, data);
+}
+
+export function putJson(url, data) {
+	return sendData(url, data, 'put');
 }
 
 export function remove(url) {

@@ -11,12 +11,15 @@ class OrderItem extends React.Component {
 	}
 
 	onOrderItemUpdated(mode) {
-		const newQuantity = (mode === 'increase') ? this.quantity++ : this.quantity--;
-		let orderItem = this.props.orderItem;
-		orderItem.quantity = newQuantity;
-		this.props.onOrderItemUpdated(orderItem, () => {
-			this.setState({quantity: newQuantity});
-		});
+		const newQuantity = (mode === 'increase') ? this.state.quantity + 1 : this.state.quantity - 1;
+
+		if (newQuantity > 0) {
+			let orderItem = Object.assign({}, this.props.orderItem);
+			orderItem.quantity = newQuantity;
+			this.props.onOrderItemUpdated(orderItem, () => {
+				this.setState({quantity: newQuantity});
+			});
+		}
 	}
 
 	render() {

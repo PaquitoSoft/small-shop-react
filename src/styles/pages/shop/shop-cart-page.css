@@ -8,4 +8,8 @@
 			font-size: 15px;
 		}
 	}
+
+	.empty-cart {
+		margin: 0 25% 0 25%;
+	}
 }

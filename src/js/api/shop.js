@@ -18,3 +18,7 @@ export function addProductToCart(data) {
 export function removeOrderItem(orderItemId) {
 	return ajax.remove(`${appConfig.apiHost}/shop-cart/order-item/${orderItemId}`);
 }
+
+export function updateOrderItem(orderItem) {
+	return ajax.putJson(`${appConfig.apiHost}/shop-cart/order-item`, orderItem);
+}

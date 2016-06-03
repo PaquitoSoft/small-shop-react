@@ -1,17 +1,16 @@
 
 # TODO
-* Select current category (top and sidebar navigation)
 * Shop cart page
-* Handle color and size
-** Add to cart
-** MiniCart
+* Select current category (top and sidebar navigation)
 * Global loader indicator
 * Last-viewed items
 * Show errors
+* Sessions to MongoDB
 * Category -> Lazy load images
 * Extract CSS to external files
 * Subscribe newsletter -> Confirmation popup
 * Reset color, size and quantity selection when changing form product to product
+* Hide shop-cart when navigating to a new page
 * Product change size lasts too long
 * Testing
 * i18n
@@ -21,6 +20,9 @@
 * Reload page when code changes
 * Mini-cart
 * Deploy (runtime configurations)
+* Handle color and size
+** Add to cart
+** MiniCart
 
 
 

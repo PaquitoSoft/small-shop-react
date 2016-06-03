@@ -7,7 +7,7 @@
 @import "./theme/responsive.css";
 
 #content {
-	min-height: 565px;
+	min-height: 600px;
 }
 
 .widget_links li a {

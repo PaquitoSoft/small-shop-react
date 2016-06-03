@@ -1,10 +1,11 @@
 import React from 'react';
 import Logger from '../../../plugins/logger';
 import events from '../../../plugins/events-bus';
-import {getShopCart, removeOrderItem} from '../../../api/shop';
+import {getShopCart, removeOrderItem, updateOrderItem} from '../../../api/shop';
 
 import OrderItem from './order-item';
 import ShopCartTotals from './shop-cart-totals';
+import EmptyShopCartMessage from './empty-shop-cart-message';
 
 import '../../../../styles/pages/shop/shop-cart-page.css';
 
@@ -46,6 +47,17 @@ class ShopCartPage extends React.Component {
 
 	orderItemUpdatedHandler(orderItem, done) {
 		// TODO Call server
+		logger.info('OrderItem to be updated:', orderItem);
+		updateOrderItem(orderItem)
+			.then(shopCart => {
+				this.setState({shopCart});
+				done();
+				events.bus.emit(events.types.SHOP_CART_UPDATED, shopCart);
+			})
+			.catch(err => {
+				// TODO Show error
+				logger.error('Error updating shop-cart:', err);
+			});
 	}
 
 	render() {
@@ -53,7 +65,11 @@ class ShopCartPage extends React.Component {
 
 		if (!shopCart.orderItems.length) {
 			// TODO Handle empty shop cart
-			return null;
+			return (
+				<div className="content-wrap shop-cart-page">
+					<EmptyShopCartMessage />
+				</div>
+			);
 		}
 
 		const orderItems = shopCart.orderItems.map((orderItem, index) => {
