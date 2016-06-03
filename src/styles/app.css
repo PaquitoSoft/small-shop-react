@@ -6,12 +6,23 @@
 @import "./theme/magnific-popup.css";
 @import "./theme/responsive.css";
 
-#root {
+#content {
 	min-height: 565px;
 }
 
 .widget_links li a {
 	background: none;
+}
+
+.top-cart-item-desc {
+	& > span {
+		line-height: 20px;
+	    font-size: 12px!important;
+	    color: #999;
+	}
+	.top-cart-item-size {
+		margin-left: 5px;
+	}
 }
 
 .top-cart-item-image {

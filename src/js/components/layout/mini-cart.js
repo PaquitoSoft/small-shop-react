@@ -38,7 +38,6 @@ class MiniCart extends React.Component {
 	}
 
 	onShopCartUpdated(shopCart) {
-		debugger;
 		this.setState({shopCart});
 	}
 
@@ -52,6 +51,8 @@ class MiniCart extends React.Component {
 
 		const orderItems = this.state.shopCart.orderItems.map((orderItem, index) => {
 			const productUrl = getProductUrl(orderItem.detail);
+			const colorName = orderItem.detail.colors.filter(color => orderItem.colorId === color.id)[0].name;
+			const sizeName = orderItem.detail.sizes.filter(size => orderItem.sizeId === size.id)[0].name;
 
 			units += orderItem.quantity;
 			totalAmount += (orderItem.quantity * orderItem.detail.price);
@@ -64,6 +65,8 @@ class MiniCart extends React.Component {
 					</div>
 					<div className="top-cart-item-desc">
 						<a href={productUrl}>{orderItem.detail.name}</a>
+						<span className="top-cart-item-color">{colorName}</span>
+						<span className="top-cart-item-size">({sizeName})</span>
 						<span className="top-cart-item-price">{orderItem.detail.price}€</span>
 						<span className="top-cart-item-quantity">x {orderItem.quantity}</span>
 					</div>
