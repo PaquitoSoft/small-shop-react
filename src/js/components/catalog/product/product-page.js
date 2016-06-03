@@ -27,8 +27,9 @@ class ProductPage extends React.Component {
 			selectedSize: props.pageData.product.sizes[0].id
 		};
 
-		this.selectColorHandler = this.onColorSelected.bind(this);
-		this.addToCartHandler = this.onAddToCart.bind(this);
+		this.onColorSelected = this.onColorSelected.bind(this);
+		this.onSizeSelected = this.onSizeSelected.bind(this);
+		this.onAddToCart = this.onAddToCart.bind(this);
 	}
 
 	static loadPageData(request) {
@@ -65,7 +66,11 @@ class ProductPage extends React.Component {
 	}
 
 	onColorSelected(color) {
-		logger.info('Selected color:', color);
+		this.setState({ selectedColor: color.id });
+	}
+
+	onSizeSelected(event) {
+		this.setState({	selectedSize: event.target.value });
 	}
 
 	onAddToCart(quantity, done) {
@@ -113,17 +118,19 @@ class ProductPage extends React.Component {
 
 									<ColorSelector
 										colors={product.colors}
-										onColorSelected={this.selectColorHandler}
+										onColorSelected={this.onColorSelected}
 									/>
 									<div className="line"></div>
 
-									<SizeSelector sizes={product.sizes} />
+									<SizeSelector
+										sizes={product.sizes}
+										onSizeSelected={this.onSizeSelected} />
 									{product.sizes.length > 1 ?
 										<div className="line"></div> :
 										null
 									}
 
-									<AddProductToCart onAddProduct={this.addToCartHandler}/>
+									<AddProductToCart onAddProduct={this.onAddToCart}/>
 									<div className="line"></div>
 
 								</div>

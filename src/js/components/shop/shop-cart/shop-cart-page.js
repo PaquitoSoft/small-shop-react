@@ -34,7 +34,6 @@ class ShopCartPage extends React.Component {
 
 		removeOrderItem(orderItem.id)
 			.then(shopCart => {
-				debugger;
 				this.setState({shopCart}, () => {
 					events.bus.emit(events.types.SHOP_CART_UPDATED, shopCart);
 				});

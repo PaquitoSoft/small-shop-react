@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function SizeSelector({sizes: sizesList}) {
+export default function SizeSelector({sizes: sizesList, onSizeSelected}) {
 	if (sizesList.length < 2) return null;
 
 	const sizes = sizesList.map((size, index) => {
@@ -10,7 +10,7 @@ export default function SizeSelector({sizes: sizesList}) {
 	return (
 		<div className="size-selector">
 			<div className="title">Select your size:</div>
-			<select className="form-control">
+			<select className="form-control" onChange={onSizeSelected}>
 				{sizes}
 			</select>
 		</div>
