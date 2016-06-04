@@ -4,7 +4,7 @@ import events from '../../plugins/events-bus';
 import * as shopCartApi from '../../api/shop';
 import {getProductUrl, getProductImageUrl} from '../../plugins/url-builder';
 
-import Router from '../helpers/router';
+import Router from '../shared/router';
 
 const logger = new Logger('ShopCart');
 
