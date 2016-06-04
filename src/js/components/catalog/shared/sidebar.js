@@ -1,7 +1,6 @@
 import React from 'react';
 
 import ProductsMiniList from './products-mini-list';
-import NewsletterSubscribe from './newsletter-subscribe';
 
 export default function Sidebar({categories: categoriesList, popularProducts, lastViewedProductsList}) {
 	const categories = categoriesList.map((category, index) => {
@@ -24,9 +23,6 @@ export default function Sidebar({categories: categoriesList, popularProducts, la
 				<ProductsMiniList products={popularProducts} title="Popular items" />
 
 				<ProductsMiniList products={lastViewedProductsList} title="Last viewed items" />
-
-				<NewsletterSubscribe />
-
 			</div>
 		</div>
 	);

@@ -1,14 +1,13 @@
 
 # TODO
-* Shop cart page
 * Select current category (top and sidebar navigation)
 * Global loader indicator
 * Last-viewed items
 * Show errors
 * Sessions to MongoDB
 * Category -> Lazy load images
+* Checkout page
 * Extract CSS to external files
-* Subscribe newsletter -> Confirmation popup
 * Reset color, size and quantity selection when changing form product to product
 * Hide shop-cart when navigating to a new page
 * Product change size lasts too long
@@ -23,6 +22,7 @@
 * Handle color and size
 ** Add to cart
 ** MiniCart
+* Shop cart page
 
 
 

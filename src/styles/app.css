@@ -50,3 +50,8 @@
 		margin-top: 40px;
 	}
 }
+
+.modal-dialog {
+	width: 33%;
+	margin-top: 150px;
+}

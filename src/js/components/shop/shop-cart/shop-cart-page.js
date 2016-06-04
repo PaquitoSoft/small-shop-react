@@ -11,11 +11,9 @@ import '../../../../styles/pages/shop/shop-cart-page.css';
 
 const logger = new Logger('ShopCartPage');
 
-class ShopCartPage extends React.Component {
+const updateShopCartErrorMessage = (<span>There was a problem updating you shop-cart.<br/>Please try again later.</span>);
 
-	constructor(props) {
-		super();
-	}
+class ShopCartPage extends React.Component {
 
 	static loadPageData() {
 		logger.debug("Let's load shop cart page required data...");
@@ -27,12 +25,10 @@ class ShopCartPage extends React.Component {
 	}
 
 	componentWillMount() {
-		this.state = {shopCart: this.props.pageData.shopCart};
+		this.setState({ shopCart: this.props.pageData.shopCart });
 	}
 
 	orderItemRemovedHandler(orderItem) {
-		logger.debug('TODO: Handle orderItem remove:', orderItem.id);
-
 		removeOrderItem(orderItem.id)
 			.then(shopCart => {
 				this.setState({shopCart}, () => {
@@ -40,14 +36,12 @@ class ShopCartPage extends React.Component {
 				});
 			})
 			.catch(err => {
-				logger.warn('Error removing order-item:', err);
-				console.log(err.stack);
+				events.bus.emit(events.types.SHOW_MODAL, updateShopCartErrorMessage);
+				logger.error('Error removing order-item:', err);
 			});
 	}
 
 	orderItemUpdatedHandler(orderItem, done) {
-		// TODO Call server
-		logger.info('OrderItem to be updated:', orderItem);
 		updateOrderItem(orderItem)
 			.then(shopCart => {
 				this.setState({shopCart});
@@ -55,16 +49,20 @@ class ShopCartPage extends React.Component {
 				events.bus.emit(events.types.SHOP_CART_UPDATED, shopCart);
 			})
 			.catch(err => {
-				// TODO Show error
+				events.bus.emit(events.types.SHOW_MODAL, updateShopCartErrorMessage);
 				logger.error('Error updating shop-cart:', err);
 			});
+	}
+
+	onProceedToCheckout(event) {
+		event.preventDefault();
+		events.bus.emit(events.types.SHOW_MODAL, 'Coming soon!');
 	}
 
 	render() {
 		const shopCart = this.state.shopCart;
 
 		if (!shopCart.orderItems.length) {
-			// TODO Handle empty shop cart
 			return (
 				<div className="content-wrap shop-cart-page">
 					<EmptyShopCartMessage />
@@ -107,7 +105,7 @@ class ShopCartPage extends React.Component {
 										<div className="row clearfix">
 											<div className="col-md-6 col-xs-6 nopadding"></div>
 											<div className="col-md-6 col-xs-6 nopadding">
-												<a href="#" className="button button-3d notopmargin fright">Proceed to Checkout</a>
+												<a href="#" className="button button-3d notopmargin fright" onClick={this.onProceedToCheckout}>Proceed to Checkout</a>
 											</div>
 										</div>
 									</td>
