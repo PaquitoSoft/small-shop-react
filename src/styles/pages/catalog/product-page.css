@@ -16,6 +16,13 @@
 		}
 	}
 
+	.product-navigation-links {
+		text-align: right;
+		.separator {
+			margin: 0 5px 0 5px;
+		}
+	}
+
 	.product-name {
 		font-family: 'Raleway', sans-serif;
 		margin-right: 10px;

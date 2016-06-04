@@ -55,3 +55,8 @@
 	width: 33%;
 	margin-top: 150px;
 }
+
+a.disabled, a.disabled:hover, a.disabled:visited {
+	color: #969A99;
+	cursor: default;
+}

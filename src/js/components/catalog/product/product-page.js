@@ -9,13 +9,12 @@ import ProductDetailMainInfo from './product-detail-main-info';
 import ColorSelector from './color-selector';
 import SizeSelector from './size-selector';
 import AddProductToCart from './add-product-to-cart';
+import ProductNavigationLinks from './product-navigation-links';
 import Sidebar from '../shared/sidebar';
 
 import '../../../../styles/pages/catalog/product-page.css';
 
 const logger = new Logger('CategoryPage');
-
-// TODO Navigate through category's products
 
 class ProductPage extends React.Component {
 
@@ -35,19 +34,30 @@ class ProductPage extends React.Component {
 	static loadPageData(request) {
 		logger.debug("Let's load product page required data...");
 		return new Promise((resolve, reject) => {
-			Promise.all([
+			let promises = [
 				catalogApi.getProductDetails(request.params.productId),
 				catalogApi.getPopularProducts(),
 				catalogApi.getCategories()
-			])
-			.then(values => {
-				resolve({
-					product: values[0],
-					popularProducts: values[1],
-					categories: values[2]
-				});
-			})
-			.catch(reject);
+			];
+
+			if (request.params.categoryId) {
+				promises.push(catalogApi.getCategoryProducts(request.params.categoryId));
+			}
+
+			Promise.all(promises)
+				.then(values => {
+					resolve({
+						product: values[0],
+						popularProducts: values[1],
+						categories: values[2],
+						category: {
+							id: request.params.categoryId,
+							name: request.params.categoryName
+						},
+						categoryProducts: values[3]
+					});
+				})
+				.catch(reject);
 		});
 	}
 
@@ -82,7 +92,6 @@ class ProductPage extends React.Component {
 		};
 		shopCartApi.addProductToCart(orderItem)
 			.then(shopCart => {
-				// TODO Show success
 				events.bus.emit(events.types.SHOP_CART_UPDATED, shopCart);
 				done();
 			})
@@ -112,6 +121,11 @@ class ProductPage extends React.Component {
 								</div>
 
 								<div className="col_half col_last product-desc">
+
+									<ProductNavigationLinks
+										currentProduct={product}
+										category={this.props.pageData.category}
+										categoryProducts={this.props.pageData.categoryProducts} />
 
 									<ProductDetailMainInfo product={product} />
 									<div className="line"></div>

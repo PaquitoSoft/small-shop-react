@@ -23,7 +23,7 @@
 ** Add to cart
 ** MiniCart
 * Shop cart page
-
+* Category products navigation
 
 
 componentWillMount() {

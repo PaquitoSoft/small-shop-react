@@ -5,8 +5,11 @@ export function getCategoryUrl(category) {
 }
 
 export function getProductUrl(product, category) {
-	// return `/category/${category.name}/${category.id}/product/${product.name}/${product.id}`;
-	return `/product/${product.name}/${product.id}`;
+	if (category) {
+		return `/category/${category.name}/${category.id}/product/${product.name}/${product.id}`;
+	} else {
+		return `/product/${product.name}/${product.id}`;
+	}
 }
 
 export function getProductImageUrl(product, imageIndex) {

@@ -34,7 +34,6 @@ class CategoryPage extends React.Component {
 				catalogApi.getCategories()
 			])
 			.then(values => {
-				logger.debug('This is received data:', values[0], values[2]);
 				resolve({
 					category: values[0],
 					categoryProducts: values[1],
@@ -50,7 +49,7 @@ class CategoryPage extends React.Component {
 		const pageData = this.props.pageData;
 
 		const products = pageData.categoryProducts.map((product, index) => {
-			return (<ProductSummary product={product} key={index} />);
+			return (<ProductSummary product={product} key={index} category={pageData.category} />);
 		});
 
 		const categories = pageData.categories.map((category, index) => {
