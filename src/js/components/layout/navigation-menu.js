@@ -14,8 +14,11 @@ class NavigationMenu extends React.Component {
 		super();
 
 		this.state = {
-			categories: []
+			categories: [],
+			selectedCategoryId: -1
 		};
+
+		this.onNavigationEnd = this.onNavigationEnd.bind(this);
 	}
 
 	componentWillMount() {
@@ -27,11 +30,28 @@ class NavigationMenu extends React.Component {
 				logger.error('componentWillMount# Error loading categories:', err);
 				events.bus.emit(events.types.SHOW_MODAL, 'Could not load navigation categories.');
 			});
+
+		events.bus.on(events.types.NAVIGATION_END, this.onNavigationEnd);
+	}
+
+	componentWillUnmount() {
+		events.bus.removeListener(events.types.NAVIGATION_END, this.onNavigationEnd);
+	}
+
+	onNavigationEnd(requestContext) {
+		this.setState({ selectedCategoryId: requestContext.params.categoryId });
 	}
 
 	createCategoryElements(categories) {
 		return categories.map((category, index) => {
-			return (<li key={index}><a href={`/category/${category.name}/${category.id}`}><div>{category.name}</div></a></li>);
+			return (
+				<li key={index}>
+					<a
+						href={`/category/${category.name}/${category.id}`}
+						className={category.id === this.state.selectedCategoryId ? 'selected' : ''}>
+						<div>{category.name}</div>
+					</a>
+				</li>);
 		});
 	}
 

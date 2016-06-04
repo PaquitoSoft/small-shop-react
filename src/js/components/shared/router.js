@@ -28,6 +28,7 @@ class Router extends React.Component {
 	handleRouteChange(pageModulePath, routeContext) {
 		logger.debug('handleRouteChange# Navigating to:', pageModulePath, routeContext);
 
+		events.bus.emit(events.types.NAVIGATION_START, routeContext);
 		require(`bundle!../${pageModulePath}`)(pageModule => {
 			const PageComponent = pageModule.default;
 
@@ -38,11 +39,14 @@ class Router extends React.Component {
 						currentComponent: PageComponent,
 						routeContext,
 						pageData
+					}, () => {
+						events.bus.emit(events.types.NAVIGATION_END, routeContext);
 					});
 				})
 				.catch(err => {
 					logger.error('handleRouteChange# Navigation error:', err);
 					logger.error(err.stack);
+					events.bus.emit(events.types.NAVIGATION_END, routeContext);
 					events.bus.emit(events.types.SHOW_MODAL,
 						'Could not load next page');
 				});

@@ -2,6 +2,8 @@
 # TODO
 * Select current category (top and sidebar navigation)
 * Global loader indicator
+* Both categories menu share some behavior (listen to event to update private
+	selected category). Let's create a High Order Component to share that code.
 * Last-viewed items
 * Show errors
 * Sessions to MongoDB

@@ -51,6 +51,25 @@
 	}
 }
 
+#primary-menu {
+	.navigation-categories {
+		.selected {
+			color: #1ABC9C;
+			background-color: #F9F9F9;
+			padding-left: 15px !important;
+		}
+	}
+}
+
+.sidebar {
+	.categories-nav {
+		.selected {
+			font-size: 16px;
+			font-weight: bold;
+		}
+	}
+}
+
 .modal-dialog {
 	width: 33%;
 	margin-top: 150px;
