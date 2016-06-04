@@ -87,9 +87,9 @@ class ProductPage extends React.Component {
 				done();
 			})
 			.catch(err => {
-				// TODO Show error
 				logger.error('Could not add product to cart:', err);
-				console.warn(err.stack);
+				events.bus.emit(events.types.SHOW_MODAL,
+					'There was a problem adding this product to shop cart');
 			});
 	}
 

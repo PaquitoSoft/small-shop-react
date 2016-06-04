@@ -1,6 +1,8 @@
 import React from 'react';
-import * as catalogApi from '../../api/catalog';
+import {getCategories} from '../../api/catalog';
 import Logger from '../../plugins/logger';
+import events from '../../plugins/events-bus';
+
 import MiniCart from './mini-cart';
 import SearchControl from './search-control';
 
@@ -17,12 +19,13 @@ class NavigationMenu extends React.Component {
 	}
 
 	componentWillMount() {
-		catalogApi.getCategories()
+		getCategories()
 			.then(categories => {
 				this.setState({ categories });
 			})
 			.catch(err => {
-				logger.error('componentWillMount# Error loading categories:', err.toString());
+				logger.error('componentWillMount# Error loading categories:', err);
+				events.bus.emit(events.types.SHOW_MODAL, 'Could not load navigation categories.');
 			});
 	}
 

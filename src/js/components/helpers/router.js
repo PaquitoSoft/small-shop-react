@@ -1,6 +1,7 @@
 import React from 'react';
 import routerEngine from 'page';
 import Logger from '../../plugins/logger';
+import events from '../../plugins/events-bus';
 
 const logger = new Logger('Router');
 
@@ -40,9 +41,10 @@ class Router extends React.Component {
 					});
 				})
 				.catch(err => {
-					// TODO Generic navigation error handling
-					logger.error('handleRouteChange# Navigation error:', err.toString());
+					logger.error('handleRouteChange# Navigation error:', err);
 					logger.error(err.stack);
+					events.bus.emit(events.types.SHOW_MODAL,
+						'Could not load next page');
 				});
 		});
 	}

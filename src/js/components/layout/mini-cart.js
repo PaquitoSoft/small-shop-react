@@ -29,7 +29,7 @@ class MiniCart extends React.Component {
 				this.setState({shopCart});
 			})
 			.catch(err => {
-				logger.error('Could not load shop cart:', err);
+				logger.warn('Could not load mini-cart:', err);
 			});
 	}
 
