@@ -28,7 +28,8 @@ class ShopCartPage extends React.Component {
 		this.setState({ shopCart: this.props.pageData.shopCart });
 	}
 
-	orderItemRemovedHandler(orderItem) {
+	orderItemRemovedHandler(orderItem, event) {
+		event.preventDefault();
 		removeOrderItem(orderItem.id)
 			.then(shopCart => {
 				this.setState({shopCart}, () => {
