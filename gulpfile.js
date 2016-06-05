@@ -1,6 +1,7 @@
 var gulp = require('gulp'),
 	gutil = require('gulp-util'),
 	gcopy = require('gulp-copy'),
+	rename = require('gulp-rename'),
 	postcss = require('gulp-postcss'),
 	nano = require('gulp-cssnano'),
 	del = require('del'),
@@ -52,6 +53,11 @@ gulp.task('copy:html', function() {
 		.pipe(gcopy('./dist', {
 			prefix: 1
 		}));
+});
+gulp.task('copy:client-side-routing-helper', function() {
+	return gulp.src('./src/index.html')
+		.pipe(rename('200.html'))
+		.pipe(gulp.dest('./dist'));
 });
 gulp.task('copy:fonts', function() {
 	return gulp.src('./src/fonts/**/*')
@@ -162,7 +168,7 @@ gulp.task('build', function(done) {
 });
 
 gulp.task('deploy', function(done) {
-	runSequence('build', ['deploy:surge'], done);
+	runSequence('build', 'copy:client-side-routing-helper', ['deploy:surge'], done);
 });
 
 // Default task
