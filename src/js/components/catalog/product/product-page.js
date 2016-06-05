@@ -1,6 +1,7 @@
 import React from 'react';
 import Logger from '../../../plugins/logger';
 import events from '../../../plugins/events-bus';
+import * as loader from '../../../plugins/loader';
 import * as catalogApi from '../../../api/catalog';
 import * as shopCartApi from '../../../api/shop';
 
@@ -90,12 +91,15 @@ class ProductPage extends React.Component {
 			sizeId: this.state.selectedSize,
 			quantity
 		};
+		loader.show();
 		shopCartApi.addProductToCart(orderItem)
 			.then(shopCart => {
+				loader.hide();
 				events.bus.emit(events.types.SHOP_CART_UPDATED, shopCart);
 				done();
 			})
 			.catch(err => {
+				loader.hide();
 				logger.error('Could not add product to cart:', err);
 				events.bus.emit(events.types.SHOW_MODAL,
 					'There was a problem adding this product to shop cart');
