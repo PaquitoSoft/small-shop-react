@@ -21,19 +21,14 @@ class AddProductToCart extends React.Component {
 		event.preventDefault();
 		this.props.onAddProduct(this.state.quantity, () => {
 			this.setState({successMessageHidden: false});
-			setTimeout(() => {
-				// TODO: This might happen when the component has been unmounted
-				/*
-					This could help:
-					handleStoresChanged() {
-						if (this.isMounted()) { <
-							this.setState(this.getStateFromStores(this.props));
-						}
-					}
-				*/
+			this.timer = setTimeout(() => {
 				this.setState({successMessageHidden: true});
 			}, 1500);
 		});
+	}
+
+	componentWillUnmount() {
+		clearTimeout(this.timer);
 	}
 
 	render() {
