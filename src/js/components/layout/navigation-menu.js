@@ -50,7 +50,7 @@ class NavigationMenu extends React.Component {
 
 		return (
 			<nav id="primary-menu">
-				<ul>
+				<ul className="show">
 					<li className="navigation-categories">
 						<a href="#"><div>Categories</div><span>Out of the Box</span></a>
 						<div className="mega-menu-content style-2 clearfix">
