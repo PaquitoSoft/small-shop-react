@@ -1,7 +1,5 @@
 
 # TODO
-* Last-viewed items
-* Show errors
 * Sessions to MongoDB
 * Category -> Lazy load images
 * Checkout page
@@ -26,6 +24,8 @@
 * Global loader indicator
 * Both categories menu share some behavior (listen to event to update private
 	selected category). Let's create a High Order Component to share that code.
+* Last-viewed items
+* Show errors
 
 
 componentWillMount() {
@@ -34,7 +34,6 @@ componentWillMount() {
 
 componentDidMount() {
 	console.log('componentDidMount:', arguments);
-	console.log(this.props.pageData.product.id);
 }
 
 componentWillReceiveProps() {
@@ -47,7 +46,6 @@ componentWillUpdate() {
 
 componentDidUpdate() {
 	console.log('componentDidUpdate:', arguments);
-	console.log(this.props.pageData.product.id);
 }
 
 componentWillUnmount() {

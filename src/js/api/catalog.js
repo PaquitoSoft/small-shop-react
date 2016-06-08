@@ -1,5 +1,10 @@
+import lscache from 'lscache';
 import appConfig from '../config/app-config';
 import * as ajax from '../plugins/ajax';
+import events from '../plugins/events-bus';
+
+const LAST_VIEWED_PRODUCTS_STORAGE_KEY = 'Last-viewed-products';
+const MAX_LAST_VIEWED_PRODUCTS = 4;
 
 export function getHomeBanner() {
 	return ajax.getText(`${appConfig.apiHost}/static/content/catalog/home-banner.html`, {
@@ -41,4 +46,23 @@ export function getProductDetails(productId) {
 	return ajax.getJson(`${appConfig.apiHost}/catalog/product/${productId}`, {
 		ttl: 60 // minutes
 	});
+}
+
+
+export function getLastViewedProducts() {
+	return lscache.get(LAST_VIEWED_PRODUCTS_STORAGE_KEY) || [];
+}
+
+export function addLastViewedProducts(product) {
+	let products = lscache.get(LAST_VIEWED_PRODUCTS_STORAGE_KEY) || [],
+		productIndex = products.findIndex(p => p.id === product.id);
+
+	if (productIndex === -1) {
+		products.unshift(product);
+		if (products.length > MAX_LAST_VIEWED_PRODUCTS) {
+			products.pop();
+		}
+		lscache.set(LAST_VIEWED_PRODUCTS_STORAGE_KEY, products);
+		events.bus.emit(events.types.LAST_VIEWED_PRODUCTS_UPDATED, products);
+	}
 }

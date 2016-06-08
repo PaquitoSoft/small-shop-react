@@ -11,6 +11,7 @@ import ColorSelector from './color-selector';
 import SizeSelector from './size-selector';
 import AddProductToCart from './add-product-to-cart';
 import ProductNavigationLinks from './product-navigation-links';
+import LastViewedProducts from './last-viewed-products';
 import Sidebar from '../shared/sidebar';
 
 import '../../../../styles/pages/catalog/product-page.css';
@@ -24,7 +25,8 @@ class ProductPage extends React.Component {
 
 		this.state = {
 			selectedColor: props.pageData.product.colors[0].id,
-			selectedSize: props.pageData.product.sizes[0].id
+			selectedSize: props.pageData.product.sizes[0].id,
+			lastViewedProducts: []
 		};
 
 		this.onColorSelected = this.onColorSelected.bind(this);
@@ -65,16 +67,24 @@ class ProductPage extends React.Component {
 	componentDidMount() {
 		this.setState({
 			selectedColor: this.props.pageData.product.colors[0].id,
-			selectedSize: this.props.pageData.product.sizes[0].id
+			selectedSize: this.props.pageData.product.sizes[0].id,
+			lastViewedProducts: catalogApi.getLastViewedProducts()
 		});
+		catalogApi.addLastViewedProducts(this.props.pageData.product);
+	}
+
+	componentDidUpdate() {
+		catalogApi.addLastViewedProducts(this.props.pageData.product);
 	}
 
 	componentWillReceiveProps(newProps) {
 		this.setState({
 			selectedColor: newProps.pageData.product.colors[0].id,
-			selectedSize: newProps.pageData.product.sizes[0].id
+			selectedSize: newProps.pageData.product.sizes[0].id,
+			lastViewedProducts: catalogApi.getLastViewedProducts()
 		});
 	}
+
 
 	onColorSelected(color) {
 		this.setState({ selectedColor: color.id });
@@ -158,6 +168,9 @@ class ProductPage extends React.Component {
 						</div>
 
 						<div className="clear"></div>
+
+						<LastViewedProducts products={this.state.lastViewedProducts} />
+
 						<div className="line"></div>
 
 					</div>
@@ -166,7 +179,7 @@ class ProductPage extends React.Component {
 					<Sidebar
 						categories={this.props.pageData.categories}
 						popularProducts={this.props.pageData.popularProducts}
-						lastViewedProductsList={[]}
+						lastViewedProductsList={this.state.getLastViewedProducts}
 					/>
 
 				</div>

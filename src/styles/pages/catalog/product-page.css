@@ -67,4 +67,18 @@
 			width: auto;
 		}
 	}
+
+	.last-viewed-products {
+		.product {
+			display: inline-block;
+			width: 20%;
+			padding: 10px;
+			.product-title h3 {
+				font-size: 18px;
+			}
+			.product-price {
+				font-size: 16px;
+			}
+		}
+	}
 }
