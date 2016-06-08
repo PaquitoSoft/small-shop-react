@@ -3,6 +3,7 @@ import {getCategories} from '../../api/catalog';
 import Logger from '../../plugins/logger';
 import events from '../../plugins/events-bus';
 
+import CategoryChangeListener from '../mixins/category-change-listener';
 import MiniCart from './mini-cart';
 import SearchControl from './search-control';
 
@@ -14,11 +15,8 @@ class NavigationMenu extends React.Component {
 		super();
 
 		this.state = {
-			categories: [],
-			selectedCategoryId: -1
+			categories: []
 		};
-
-		this.onNavigationEnd = this.onNavigationEnd.bind(this);
 	}
 
 	componentWillMount() {
@@ -30,16 +28,6 @@ class NavigationMenu extends React.Component {
 				logger.error('componentWillMount# Error loading categories:', err);
 				events.bus.emit(events.types.SHOW_MODAL, 'Could not load navigation categories.');
 			});
-
-		events.bus.on(events.types.NAVIGATION_END, this.onNavigationEnd);
-	}
-
-	componentWillUnmount() {
-		events.bus.removeListener(events.types.NAVIGATION_END, this.onNavigationEnd);
-	}
-
-	onNavigationEnd(requestContext) {
-		this.setState({ selectedCategoryId: requestContext.params.categoryId });
 	}
 
 	createCategoryElements(categories) {
@@ -48,7 +36,7 @@ class NavigationMenu extends React.Component {
 				<li key={index}>
 					<a
 						href={`/category/${category.name}/${category.id}`}
-						className={category.id === this.state.selectedCategoryId ? 'selected' : ''}>
+						className={category.id === this.props.selectedCategoryId ? 'selected' : ''}>
 						<div>{category.name}</div>
 					</a>
 				</li>);
@@ -93,4 +81,4 @@ class NavigationMenu extends React.Component {
 	}
 }
 
-export default NavigationMenu;
+export default CategoryChangeListener(NavigationMenu);
