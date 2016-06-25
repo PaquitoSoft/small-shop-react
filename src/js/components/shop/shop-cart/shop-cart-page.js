@@ -4,7 +4,7 @@ import events from '../../../plugins/events-bus';
 import {getShopCart, removeOrderItem, updateOrderItem} from '../../../api/shop';
 
 import OrderItem from './order-item';
-import ShopCartTotals from './shop-cart-totals';
+import ShopCartTotals from '../shared/shop-cart-totals';
 import EmptyShopCartMessage from './empty-shop-cart-message';
 
 import '../../../../styles/pages/shop/shop-cart-page.css';
@@ -55,11 +55,6 @@ class ShopCartPage extends React.Component {
 			});
 	}
 
-	onProceedToCheckout(event) {
-		event.preventDefault();
-		events.bus.emit(events.types.SHOW_MODAL, 'Coming soon!');
-	}
-
 	render() {
 		const shopCart = this.state.shopCart;
 
@@ -106,7 +101,7 @@ class ShopCartPage extends React.Component {
 										<div className="row clearfix">
 											<div className="col-md-6 col-xs-6 nopadding"></div>
 											<div className="col-md-6 col-xs-6 nopadding">
-												<a href="#" className="button button-3d notopmargin fright" onClick={this.onProceedToCheckout}>Proceed to Checkout</a>
+												<a href="/checkout" className="button button-3d notopmargin fright">Proceed to Checkout</a>
 											</div>
 										</div>
 									</td>

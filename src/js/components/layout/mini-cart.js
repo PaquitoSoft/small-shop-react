@@ -57,7 +57,6 @@ class MiniCart extends React.Component {
 			units += orderItem.quantity;
 			totalAmount += (orderItem.quantity * orderItem.detail.price);
 
-			// TODO: Show color and size for every item
 			return (
 				<div className="top-cart-item clearfix" key={index}>
 					<div className="top-cart-item-image">

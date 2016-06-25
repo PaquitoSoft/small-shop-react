@@ -1,0 +1,5 @@
+.checkout-page {
+	.cart-product-thumbnail img {
+		height: auto;
+	}
+}
