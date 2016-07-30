@@ -1,7 +1,7 @@
 import messages from '../messages/messages';
 
 const DEFAULT_LANGUAGE = 'en';
-let currentLanguage = (navigator.language || DEFAULT_LANGUAGE).split('_')[0];
+let currentLanguage = (navigator.language || DEFAULT_LANGUAGE).split('-')[0];
 
 export function getText(key) {
 	const tokens = key.split('.');
