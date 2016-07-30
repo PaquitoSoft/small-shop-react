@@ -2,4 +2,17 @@
 	.cart-product-thumbnail img {
 		height: auto;
 	}
+
+	.shop-cart-summary {
+		margin-bottom: 50px;
+	}
+
+	.payment-methods {
+		.payment-method .acc_content {
+			display: none;
+		}
+		.payment-method .acc_content.selected {
+			display: block;
+		}
+	}
 }

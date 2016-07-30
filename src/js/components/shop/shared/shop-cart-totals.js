@@ -1,6 +1,8 @@
 import React from 'react';
 
-export default function ShopCartTotals({shopCart}) {
+import {getText} from '../../../plugins/i18n';
+
+export default function ShopCartTotals({shopCart, title}) {
 	const totalAmount = shopCart.orderItems.reduce((total, orderItem) => {
 		total += (orderItem.detail.price * orderItem.quantity);
 		return total;
@@ -8,13 +10,13 @@ export default function ShopCartTotals({shopCart}) {
 
 	return (
 		<div className="table-responsive shop-cart-totals">
-			<h4>Cart Totals</h4>
+			<h4>{title || getText('shared.subtotals.cart-totals')}</h4>
 
 			<table className="table cart">
 				<tbody>
 					<tr className="cart_item">
 						<td className="cart-product-name">
-							<strong>Cart Subtotal</strong>
+							<strong>{getText('shared.subtotals.cart-subtotal')}</strong>
 						</td>
 						<td className="cart-product-name">
 							<span className="amount">{totalAmount}€</span>
@@ -22,16 +24,16 @@ export default function ShopCartTotals({shopCart}) {
 					</tr>
 					<tr className="cart_item">
 						<td className="cart-product-name">
-							<strong>Shipping</strong>
+							<strong>{getText('shared.subtotals.shipping')}</strong>
 						</td>
 
 						<td className="cart-product-name">
-							<span className="amount">Free Delivery</span>
+							<span className="amount">{getText('shared.subtotals.free-shipping')}</span>
 						</td>
 					</tr>
 					<tr className="cart_item">
 						<td className="cart-product-name">
-							<strong>Total</strong>
+							<strong>{getText('shared.total')}</strong>
 						</td>
 						<td className="cart-product-name">
 							<span className="amount color lead"><strong>{totalAmount}€</strong></span>

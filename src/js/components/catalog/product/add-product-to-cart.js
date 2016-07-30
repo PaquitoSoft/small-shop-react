@@ -1,5 +1,7 @@
 import React from 'react';
 
+import {getText} from '../../../plugins/i18n';
+
 class AddProductToCart extends React.Component {
 
 	constructor() {
@@ -31,6 +33,10 @@ class AddProductToCart extends React.Component {
 		clearTimeout(this.timer);
 	}
 
+	componentWillReceiveProps() {
+		this.setState({quantity: 1});
+	}
+
 	render() {
 		return (
 			<form className="cart nobottommargin clearfix" method="post" enctype="multipart/form-data">
@@ -39,10 +45,10 @@ class AddProductToCart extends React.Component {
 					<span name="quantity" className="qty">{this.state.quantity}</span>
 					<input type="button" defaultValue="+" className="plus" onClick={this.onQuantityClick.bind(this, 'add')}/>
 				</div>
-				<button type="submit" className="add-to-cart button nomargin" onClick={this.onProductAdd.bind(this)}>Add to cart</button>
-					<span className={`label product-added-msg ${this.state.successMessageHidden ? 'hidden': ''}`}>
-						Product added
-					</span>
+				<button type="submit" className="add-to-cart button nomargin" onClick={this.onProductAdd.bind(this)}>{getText('product-page.add-to-cart')}</button>
+				<span className={`label product-added-msg ${this.state.successMessageHidden ? 'hidden': ''}`}>
+					{getText('product-page.product-added')}
+				</span>
 			</form>
 		);
 	}

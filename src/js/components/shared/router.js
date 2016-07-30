@@ -59,6 +59,10 @@ class Router extends React.Component {
 			dispatch: true, // fire routing on page load
 			hashbang: false	// whether using old fashioned hash URLs or not
 		});
+
+		events.bus.on(events.types.NAVIGATION_REQUESTED, (url) => {
+			routerEngine(url);
+		});
 	}
 
 	render() {

@@ -1,9 +1,10 @@
 import React from 'react';
 
 import Logger from '../../../plugins/logger';
-
+import {getText} from '../../../plugins/i18n';
 import * as catalogApi from '../../../api/catalog';
 
+import LazyImagesLoader from '../../mixins/lazy-images-loader';
 import ProductSummary from '../shared/product-summary';
 import Sidebar from '../shared/sidebar';
 
@@ -11,7 +12,7 @@ import '../../../../styles/pages/catalog/category-page.css';
 
 const logger = new Logger('CategoryPage');
 
-class CategoryPage extends React.Component {
+class CategoryPage extends LazyImagesLoader {
 
 	constructor() {
 		super();
@@ -49,18 +50,19 @@ class CategoryPage extends React.Component {
 		const pageData = this.props.pageData;
 
 		const products = pageData.categoryProducts.map((product, index) => {
-			return (<ProductSummary product={product} key={index} category={pageData.category} />);
+			return (
+				<ProductSummary
+					product={product}
+					key={index}
+					category={pageData.category}
+					ref={(component) => component && this.observeComponent(component)}
+				/>
+			);
 		});
 
 		const categories = pageData.categories.map((category, index) => {
 			return (<li key={index}><a href={`/category/${category.name}/${category.id}`}>{category.name}</a></li>);
 		});
-
-		const lastViewedProducts = []; // TODO
-		let lastViewedProductsList;
-		if (lastViewedProducts.length) {
-			lastViewedProductsList = (<ProductsMiniList products={lastViewedProducts} title="Last viewed items" />);
-		}
 
 		return (
 			<div className="content-wrap category-page">
@@ -68,7 +70,7 @@ class CategoryPage extends React.Component {
 				<div className="container clearfix">
 
 					<div className="products-count">
-						<span className="count">{products.length}</span>&nbsp;<span>products</span>
+						<span className="count">{products.length}</span>&nbsp;<span>{getText('category-page.products')}</span>
 					</div>
 
 					<div className="postcontent nobottommargin col_last">
@@ -77,11 +79,9 @@ class CategoryPage extends React.Component {
 						</div>
 					</div>
 
-					{/* TODO Pass last viewed items */}
 					<Sidebar
 						categories={pageData.categories}
 						popularProducts={pageData.popularProducts}
-						lastViewedProductsList={[]}
 					/>
 
 				</div>

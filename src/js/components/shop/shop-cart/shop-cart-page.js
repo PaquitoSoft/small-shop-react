@@ -1,6 +1,8 @@
 import React from 'react';
+
 import Logger from '../../../plugins/logger';
 import events from '../../../plugins/events-bus';
+import {getText} from '../../../plugins/i18n';
 import {getShopCart, removeOrderItem, updateOrderItem} from '../../../api/shop';
 
 import OrderItem from './order-item';
@@ -88,10 +90,10 @@ class ShopCartPage extends React.Component {
 								<tr>
 									<th className="cart-product-remove">&nbsp;</th>
 									<th className="cart-product-thumbnail">&nbsp;</th>
-									<th className="cart-product-name">Product</th>
-									<th className="cart-product-price">Unit Price</th>
-									<th className="cart-product-quantity">Quantity</th>
-									<th className="cart-product-subtotal">Total</th>
+									<th className="cart-product-name">{getText('shop-cart-page.product')}</th>
+									<th className="cart-product-price">{getText('shop-cart-page.unit-price')}</th>
+									<th className="cart-product-quantity">{getText('shop-cart-page.quantity')}</th>
+									<th className="cart-product-subtotal">{getText('shared.total')}</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -101,7 +103,7 @@ class ShopCartPage extends React.Component {
 										<div className="row clearfix">
 											<div className="col-md-6 col-xs-6 nopadding"></div>
 											<div className="col-md-6 col-xs-6 nopadding">
-												<a href="/checkout" className="button button-3d notopmargin fright">Proceed to Checkout</a>
+												<a href="/checkout" className="button button-3d notopmargin fright">{getText('shop-cart-page.go-to-checkout')}</a>
 											</div>
 										</div>
 									</td>

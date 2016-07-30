@@ -1,6 +1,8 @@
 import React from 'react';
+
 import events from '../../../plugins/events-bus';
 import {getProductUrl, getProductImageUrl} from '../../../plugins/url-builder';
+import {getText} from '../../../plugins/i18n';
 
 function LastViewedProducts({products}) {
 
@@ -30,7 +32,7 @@ function LastViewedProducts({products}) {
 	return (
 		<div className="col_full nobottommargin">
 
-			<h4>Last visited products</h4>
+			<h4>{getText('product-page.last-visited-products')}</h4>
 
 			<div className="last-viewed-products">
 				{_products}

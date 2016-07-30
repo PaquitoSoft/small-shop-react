@@ -83,6 +83,10 @@ class ProductPage extends React.Component {
 			selectedSize: newProps.pageData.product.sizes[0].id,
 			lastViewedProducts: catalogApi.getLastViewedProducts()
 		});
+
+		if (this.sizeSelector) {
+			this.sizeSelector.reset();
+		}
 	}
 
 
@@ -151,6 +155,7 @@ class ProductPage extends React.Component {
 									<div className="line"></div>
 
 									<SizeSelector
+										ref={ref => this.sizeSelector = ref}
 										sizes={product.sizes}
 										onSizeSelected={this.onSizeSelected} />
 									{product.sizes.length > 1 ?

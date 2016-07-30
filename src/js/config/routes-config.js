@@ -5,5 +5,6 @@ export default Object.freeze({
 	'/category/:categoryName/:categoryId/product/:productName/:productId': 'catalog/product/product-page',
 	'/product/:productName/:productId': 'catalog/product/product-page',
 	'/shop-cart': 'shop/shop-cart/shop-cart-page',
-	'/checkout': 'shop/checkout/checkout-page'
+	'/checkout': 'shop/checkout/checkout-page',
+	'/order-detail/:orderId': 'shop/order-confirmation/order-confirmation-page'
 });

@@ -1,7 +1,9 @@
 import React from 'react';
+
 import {getCategories} from '../../api/catalog';
 import Logger from '../../plugins/logger';
 import events from '../../plugins/events-bus';
+import {getText} from '../../plugins/i18n';
 
 import CategoryChangeListener from '../mixins/category-change-listener';
 import MiniCart from './mini-cart';
@@ -52,7 +54,7 @@ class NavigationMenu extends React.Component {
 			<nav id="primary-menu">
 				<ul className="show">
 					<li className="navigation-categories">
-						<a href="#"><div>Categories</div><span>Out of the Box</span></a>
+						<a href="#"><div>{getText('layout.categories')}</div></a>
 						<div className="mega-menu-content style-2 clearfix">
 							<ul className="mega-menu-column col-md-6">
 								<li className="mega-menu-title">
@@ -70,7 +72,7 @@ class NavigationMenu extends React.Component {
 							</ul>
 						</div>
 					</li>
-					<li><a href="#"><div>Contact</div><span>Get In Touch</span></a></li>
+					<li><a href="#"><div>{getText('layout.contact')}</div></a></li>
 				</ul>
 
 				<MiniCart />

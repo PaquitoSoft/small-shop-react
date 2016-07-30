@@ -22,3 +22,13 @@ export function removeOrderItem(orderItemId) {
 export function updateOrderItem(orderItem) {
 	return ajax.putJson(`${appConfig.apiHost}/shop-cart/order-item`, orderItem);
 }
+
+export function orderCheckout(orderAddress, paymentMethodCode) {
+	return ajax.postJson(`${appConfig.apiHost}/shop-cart/checkout`, {
+		orderAddress, paymentMethodCode
+	});
+}
+
+export function getOrderDetail(orderId) {
+	return ajax.getJson(`${appConfig.apiHost}/shop-cart/order-detail/${orderId}`)
+}

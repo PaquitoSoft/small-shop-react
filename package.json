@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "es6-promise": "^3.1.2",
+    "form-serialize": "^0.7.1",
     "lscache": "^1.0.5",
     "page": "^1.7.1",
     "react": "^15.0.1",

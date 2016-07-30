@@ -1,8 +1,10 @@
 import React from 'react';
+
 import Logger from '../../plugins/logger';
 import events from '../../plugins/events-bus';
-import * as shopCartApi from '../../api/shop';
 import {getProductUrl, getProductImageUrl} from '../../plugins/url-builder';
+import {getText} from '../../plugins/i18n';
+import * as shopCartApi from '../../api/shop';
 
 import Router from '../shared/router';
 
@@ -80,14 +82,14 @@ class MiniCart extends React.Component {
 				</a>
 				<div className="top-cart-content">
 					<div className="top-cart-title">
-						<h4>Shopping Cart</h4>
+						<h4>{getText('layout.shopping-cart')}</h4>
 					</div>
 					<div className="top-cart-items">
 						{orderItems}
 					</div>
 					<div className="top-cart-action clearfix">
 						<span className="fleft top-checkout-price">{totalAmount.toFixed(2)}€</span>
-						<button className="button button-3d button-small nomargin fright" onClick={this.navToShopCart}>View Cart</button>
+						<button className="button button-3d button-small nomargin fright" onClick={this.navToShopCart}>{getText('layout.view-cart')}</button>
 					</div>
 				</div>
 			</div>

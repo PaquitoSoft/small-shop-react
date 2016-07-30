@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { getProductColorImage } from '../../../plugins/url-builder';
+import {getText} from '../../../plugins/i18n';
 
 export default function ColorSelector({colors: colorsList, onColorSelected}) {
 	const colors = colorsList.map((color, index) => {
@@ -13,7 +14,7 @@ export default function ColorSelector({colors: colorsList, onColorSelected}) {
 
 	return (
 		<div className="color-selector">
-			<div className="title">Select a color:</div>
+			<div className="title">{getText('product-page.select-color')}</div>
 			<ul>{colors}</ul>
 		</div>
 	);

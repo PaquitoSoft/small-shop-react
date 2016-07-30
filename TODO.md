@@ -1,14 +1,10 @@
 
 # TODO
-* Sessions to MongoDB
 * Category -> Lazy load images
-* Checkout page
 * Extract CSS to external files
-* Reset color, size and quantity selection when changing form product to product
-* Hide shop-cart when navigating to a new page
 * Product change size lasts too long
+* Animations (example: product change photo)
 * Testing
-* i18n
 
 # DONE
 * Hot Module Replacement (webpack)
@@ -26,6 +22,9 @@
 	selected category). Let's create a High Order Component to share that code.
 * Last-viewed items
 * Show errors
+* Checkout page
+* i18n
+* Reset color, size and quantity selection when changing form product to product
 
 
 componentWillMount() {

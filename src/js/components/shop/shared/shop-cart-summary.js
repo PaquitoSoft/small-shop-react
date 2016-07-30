@@ -1,5 +1,6 @@
 import React from 'react';
 
+import {getText} from '../../../plugins/i18n';
 import * as urlBuilder from '../../../plugins/url-builder';
 
 export default function ShopCartSummary({orderItems}) {
@@ -30,16 +31,16 @@ export default function ShopCartSummary({orderItems}) {
 	});
 
 	return (
-		<div className="table-responsive clearfix">
-			<h4>Your Order</h4>
+		<div className="table-responsive clearfix shop-cart-summary">
+			<h4>{getText('shared.orderitems.your-order')}</h4>
 
 			<table className="table cart">
 				<thead>
 					<tr>
 						<th className="cart-product-thumbnail">&nbsp;</th>
-						<th className="cart-product-name">Product</th>
-						<th className="cart-product-quantity">Quantity</th>
-						<th className="cart-product-subtotal">Total</th>
+						<th className="cart-product-name">{getText('shared.orderitems.product')}</th>
+						<th className="cart-product-quantity">{getText('shared.orderitems.quantity')}</th>
+						<th className="cart-product-subtotal">{getText('shared.total')}</th>
 					</tr>
 				</thead>
 				<tbody>

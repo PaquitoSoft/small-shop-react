@@ -1,6 +1,9 @@
 import React from 'react';
+
 import events from '../../../plugins/events-bus';
+import {getText} from '../../../plugins/i18n';
 import CategoryChangeListener from '../../mixins/category-change-listener';
+
 import ProductsMiniList from './products-mini-list';
 
 function Sidebar(props) {
@@ -22,16 +25,14 @@ function Sidebar(props) {
 
 				<div className="widget widget_links clearfix">
 
-					<h4>Shop Categories</h4>
+					<h4>{getText('layout.categories')}</h4>
 					<ul className="categories-nav">
 						{categories}
 					</ul>
 
 				</div>
 
-				<ProductsMiniList products={props.popularProducts} title="Popular items" />
-
-				<ProductsMiniList products={props.lastViewedProductsList} title="Last viewed items" />
+				<ProductsMiniList products={props.popularProducts} title={getText('shared.popular-items')} />
 			</div>
 		</div>
 	);

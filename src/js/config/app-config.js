@@ -1,7 +1,8 @@
 
 const developmentConfig = Object.freeze({
 	apiHost: 'http://localhost:3003',
-	staticContentBasePath: 'http://localhost:3003/static'
+	_staticContentBasePath: 'http://localhost:3003/static',
+	staticContentBasePath: 'http://palmist-tapir-66487.bitballoon.com'
 });
 
 const productionConfig = Object.freeze({

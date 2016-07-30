@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {getProductUrl} from '../../../plugins/url-builder';
+import {getText} from '../../../plugins/i18n';
 
 export default function ProductNavigationLinks({currentProduct, category, categoryProducts = []}) {
 	const productIndex = categoryProducts.findIndex(product => product.id === currentProduct.id);
@@ -23,13 +24,13 @@ export default function ProductNavigationLinks({currentProduct, category, catego
 			<a
 				href={previousProductUrl ? previousProductUrl : '#'}
 				className={`prev ${!previousProductUrl ? 'disabled' : ''}`}>
-				Previous
+				{getText('product-page.previous')}
 			</a>
 			<span className="separator">|</span>
 			<a
 				href={nextProductUrl ? nextProductUrl : '#'}
 				className={`next ${!nextProductUrl ? 'disabled' : ''}`}>
-				Next
+				{getText('product-page.next')}
 			</a>
 		</div>
 	);

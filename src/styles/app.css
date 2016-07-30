@@ -93,3 +93,7 @@ a.disabled, a.disabled:hover, a.disabled:visited {
 	color: #969A99;
 	cursor: default;
 }
+
+.language-selector:hover .languages {
+	display: block;
+}
