@@ -1,9 +1,8 @@
 import React from 'react';
 
-export default function HomeInfo(props) {
-	const info = props.info;
+export default function HomeInfo({info, isLast}) {
 	return (
-		<div className={`col_one_fourth nobottommargin ${props.isLast ? 'col_last' : ''}`}>
+		<div className={`col_one_fourth nobottommargin ${isLast ? 'col_last' : ''}`}>
 			<div className="feature-box fbox-plain fbox-dark fbox-small">
 				<div className="fbox-icon">
 					<i className={info.icon}></i>
