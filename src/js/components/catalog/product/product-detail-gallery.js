@@ -24,6 +24,11 @@ class ProductDetailGallery extends React.Component {
 		});
 	}
 
+	shouldComponentUpdate(nextProps, nextState) {
+		return nextProps.product.id !== this.props.product.id ||
+			nextState.selectedImageUrl !== this.state.selectedImageUrl;
+	}
+
 	render() {
 		const product = this.props.product;
 		
@@ -43,7 +48,10 @@ class ProductDetailGallery extends React.Component {
 				<div>
 					<div className="main-image">
 						<ReactCSSTransitionGroup
-							transitionName="blur">
+							transitionName="blur"
+							transitionEnterTimeout={150}
+							transitionLeaveTimeout={150}
+						>
 							<img key={Math.random()} src={this.state.selectedImageUrl} alt={product.name}/>
 						</ReactCSSTransitionGroup>
 					</div>
