@@ -6,7 +6,6 @@ import * as catalogApi from '../../../api/catalog';
 import * as shopApi from '../../../api/shop';
 import {getText} from '../../../plugins/i18n';
 
-import LazyImagesLoader from '../../mixins/lazy-images-loader';
 import ProductSummary from '../shared/product-summary';
 import HomeInfo from './home-info';
 
@@ -14,7 +13,7 @@ import '../../../../styles/pages/catalog/home-page.css';
 
 const logger = new Logger('HomePage');
 
-class HomePage extends LazyImagesLoader {
+class HomePage extends React.Component {
 
 	static loadPageData() {
 		logger.debug("Let's load home page required data...");

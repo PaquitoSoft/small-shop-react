@@ -35,6 +35,10 @@
 	display: block !important;
 }
 
+div.shop .product-image img {
+	min-height: 5px;
+}
+
 div.shop .product-image {
 	min-height: 405px;
 }

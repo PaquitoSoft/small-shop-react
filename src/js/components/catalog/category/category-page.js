@@ -4,7 +4,6 @@ import Logger from '../../../plugins/logger';
 import {getText} from '../../../plugins/i18n';
 import * as catalogApi from '../../../api/catalog';
 
-import LazyImagesLoader from '../../mixins/lazy-images-loader';
 import ProductSummary from '../shared/product-summary';
 import Sidebar from '../shared/sidebar';
 
@@ -12,8 +11,7 @@ import '../../../../styles/pages/catalog/category-page.css';
 
 const logger = new Logger('CategoryPage');
 
-class CategoryPage extends LazyImagesLoader {
-
+class CategoryPage extends React.Component {
 	constructor() {
 		super();
 
@@ -55,7 +53,6 @@ class CategoryPage extends LazyImagesLoader {
 					product={product}
 					key={index}
 					category={pageData.category}
-					ref={(component) => component && this.observeComponent(component)}
 				/>
 			);
 		});
