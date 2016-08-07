@@ -39,7 +39,7 @@ class AddProductToCart extends React.Component {
 
 	render() {
 		return (
-			<form className="cart nobottommargin clearfix" method="post" enctype="multipart/form-data">
+			<form className="cart nobottommargin clearfix" method="post">
 				<div className="quantity clearfix">
 					<input type="button" defaultValue="-" className="minus" onClick={this.onQuantityClick.bind(this, 'subtract')}/>
 					<span name="quantity" className="qty">{this.state.quantity}</span>

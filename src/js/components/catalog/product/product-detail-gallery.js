@@ -1,5 +1,6 @@
 import React from 'react';
-import {getProductImageUrl} from '../../../plugins/url-builder';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { getProductImageUrl } from '../../../plugins/url-builder';
 
 class ProductDetailGallery extends React.Component {
 
@@ -40,8 +41,11 @@ class ProductDetailGallery extends React.Component {
 		return (
 			<div className="product-image product-gallery">
 				<div>
-					<div>
-						<img src={this.state.selectedImageUrl} alt={product.name}/>
+					<div className="main-image">
+						<ReactCSSTransitionGroup
+							transitionName="blur">
+							<img key={Math.random()} src={this.state.selectedImageUrl} alt={product.name}/>
+						</ReactCSSTransitionGroup>
 					</div>
 					<ol className="thumbnails">
 						{thumbnails}

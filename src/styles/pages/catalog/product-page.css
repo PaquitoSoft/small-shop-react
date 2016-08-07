@@ -1,5 +1,14 @@
 .product-page {
 	.product-gallery {
+		.main-image {
+			position: relative;
+			height: 620px;
+
+			img {
+				position: absolute;
+				top: 0;
+			}
+		}
 		.thumbnails {
 			margin-top: 10px;
 			& li {

@@ -1,10 +1,9 @@
 
 # TODO
-* Category -> Lazy load images
+* Testing
 * Extract CSS to external files
 * Product change size lasts too long
-* Animations (example: product change photo)
-* Testing
+
 
 # DONE
 * Hot Module Replacement (webpack)
@@ -25,6 +24,8 @@
 * Checkout page
 * i18n
 * Reset color, size and quantity selection when changing form product to product
+* Category -> Lazy load images
+* Animations (example: product change photo)
 
 
 componentWillMount() {

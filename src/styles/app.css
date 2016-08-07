@@ -101,3 +101,23 @@ a.disabled, a.disabled:hover, a.disabled:visited {
 .language-selector:hover .languages {
 	display: block;
 }
+
+
+/* Animations */
+.blur-enter {
+  opacity: 0.01;
+}
+
+.blur-enter.blur-enter-active {
+  opacity: 1;
+  transition: opacity 150ms ease-in;
+}
+
+.blur-leave {
+  opacity: 1;
+}
+
+.blur-leave.blur-leave-active {
+  opacity: 0.01;
+  transition: opacity 150ms ease-in;
+}

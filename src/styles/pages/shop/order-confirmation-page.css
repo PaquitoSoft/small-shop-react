@@ -1,4 +1,7 @@
 .order-confirmation-page {
+	.cart-product-thumbnail img {
+		height: auto;
+	}
 	.address-summary {
 		h4 {
 			margin-bottom: 0px;
