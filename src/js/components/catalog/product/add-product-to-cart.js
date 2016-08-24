@@ -21,11 +21,12 @@ class AddProductToCart extends React.Component {
 
 	onProductAdd(event) {
 		event.preventDefault();
+		
 		this.props.onAddProduct(this.state.quantity, () => {
 			this.setState({successMessageHidden: false});
 			this.timer = setTimeout(() => {
 				this.setState({successMessageHidden: true});
-			}, 1500);
+			}, this.props.successMessageVisibleTime || 1500);
 		});
 	}
 

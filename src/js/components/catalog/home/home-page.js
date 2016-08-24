@@ -1,11 +1,8 @@
 import React from 'react';
-
 import Logger from '../../../plugins/logger';
-
 import * as catalogApi from '../../../api/catalog';
 import * as shopApi from '../../../api/shop';
 import {getText} from '../../../plugins/i18n';
-
 import ProductSummary from '../shared/product-summary';
 import HomeInfo from './home-info';
 

@@ -180,11 +180,9 @@ class ProductPage extends React.Component {
 
 					</div>
 
-					{/* TODO Pass last viewed items */}
 					<Sidebar
 						categories={this.props.pageData.categories}
 						popularProducts={this.props.pageData.popularProducts}
-						lastViewedProductsList={this.state.getLastViewedProducts}
 					/>
 
 				</div>

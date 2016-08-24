@@ -1,8 +1,8 @@
-const React = require('react');
-const shallow = require('enzyme').shallow;
-const expect = require('chai').expect;
+import React from 'react';
+import { shallow } from 'enzyme';
+import { expect } from 'chai';
 
-const HomeInfo = require('../../../../../src/js/components/catalog/home/home-info').default;
+import HomeInfo from '../../../../../src/js/components/catalog/home/home-info';
 
 describe('<HomeInfo />', function() {
 
