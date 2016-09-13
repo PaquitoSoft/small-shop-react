@@ -105,7 +105,9 @@ class ProductPage extends React.Component {
 			sizeId: this.state.selectedSize,
 			quantity
 		};
+		
 		loader.show();
+		
 		shopCartApi.addProductToCart(orderItem)
 			.then(shopCart => {
 				loader.hide();
